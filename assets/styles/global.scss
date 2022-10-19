@@ -1,0 +1,9 @@
+html {
+    font-size: 14px;
+    font-family: "Inter", sans-serif;
+    font-weight: 100;
+}
+
+input:focus {
+    outline: 2px solid rgba(var(--badgeMain));
+}
