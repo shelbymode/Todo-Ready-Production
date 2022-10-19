@@ -6,6 +6,7 @@ export const taskDataSchema = z
         userId: z.string(),
         body: z.string(),
         done: z.boolean(),
+        createdAt: z.string(),
     })
     .strict();
 

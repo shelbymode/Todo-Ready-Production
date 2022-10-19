@@ -6,7 +6,7 @@ export default defineEventHandler(() => [
         gender: "MALE",
         role: "STANDARD",
         tasks: [],
-        // createdAt: "2022-10-19T12:26:50.812Z",
+        createdAt: "2022-10-19T12:26:50.812Z",
     },
     {
         id: "222",
@@ -14,6 +14,6 @@ export default defineEventHandler(() => [
         email: "intern.shavel@gmail.com",
         gender: "FEMALE",
         role: "ADMIN",
-        // createdAt: "2022-10-19T12:26:50.812",
+        createdAt: "2022-10-19T12:26:50.812",
     },
 ]);
