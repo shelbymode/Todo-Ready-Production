@@ -1,17 +1,11 @@
 <script setup lang="ts">
-import { UserEntity } from "~~/entity/User/UserEntity";
-import { UserParser } from "~~/parser/User/UserParser";
+import { UserService } from "~~/service/User/UserService";
 
 async function createUser() {
-    const { data } = await useFetch("/api/users");
+    const userService = new UserService();
+    const outputUser = await userService.getOneUser("111");
 
-    const rawUser1 = new UserEntity(data.value[0] as unknown);
-
-    console.log("Raw data:", rawUser1);
-
-    const parsedUser1 = UserParser.parseTo(rawUser1.data);
-
-    console.log("Parsed data:", parsedUser1);
+    console.log("outputUser", outputUser);
 }
 </script>
 
