@@ -10,5 +10,5 @@ export const taskDataSchema = z
     })
     .strict();
 
-export type TTaskDataSchema = typeof taskDataSchema;
-export type TTaskData = z.infer<TTaskDataSchema>;
+export type TTaskInputDataSchema = typeof taskDataSchema;
+export type TTaskParserInputData = z.infer<TTaskInputDataSchema>;

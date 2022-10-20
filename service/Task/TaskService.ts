@@ -1,29 +1,37 @@
 import { TaskAPI } from "~~/API/Task/TaskAPI";
 import { TaskEntity } from "~~/entity/Task/TaskEntity";
+import {
+    TTaskInputDataSchema,
+    TTaskParserInputData,
+} from "~~/entity/Task/TaskEntity.types";
 import { TaskParser } from "~~/parser/Task/TaskParser";
+import {
+    TTaskOutputDataSchema,
+    TTaskParserOutputData,
+} from "~~/parser/Task/TaskParser.types";
 import { HttpService } from "~~/shared/Http/HttpService";
 import { logError } from "~~/utils/logError";
+import { ProcessService } from "../Core/ProcessService";
 import { ITaskService } from "./TaskService.types";
 
-export class TaskService implements ITaskService {
+export class TaskService
+    extends ProcessService<
+        TTaskInputDataSchema,
+        TTaskOutputDataSchema,
+        TTaskParserInputData,
+        TTaskParserOutputData
+    >
+    implements ITaskService
+{
     _httpService: HttpService;
     _taskAPI: TaskAPI;
-    _taskParser: TaskParser;
-
     constructor() {
+        super({
+            modelParser: new TaskParser(),
+            ModelEntity: TaskEntity,
+        });
         this._httpService = new HttpService();
         this._taskAPI = new TaskAPI();
-        this._taskParser = new TaskParser();
-    }
-    processData(fetchedData: unknown) {
-        // Run-time validation from DB (according to input data schema)
-        const validatedModel = new TaskEntity({
-            data: fetchedData,
-        });
-
-        // Transformation data (according to output data schema)
-        const transformedModel = this._taskParser.parseTo(validatedModel.data);
-        return transformedModel;
     }
     async getOneTask(id: string) {
         try {

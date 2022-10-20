@@ -1,13 +1,20 @@
 import { CoreEntity } from "../Core/CoreEntity";
-import { TUserData, TUserDataSchema, userDataSchema } from "./UserEntity.types";
+import {
+    TUserParserInputData,
+    TUserInputDataSchema,
+    userDataSchema,
+} from "./UserEntity.types";
 
-export class UserEntity extends CoreEntity<TUserDataSchema, TUserData> {
+export class UserEntity extends CoreEntity<
+    TUserInputDataSchema,
+    TUserParserInputData
+> {
     constructor({
         data,
         modelDataSchema = userDataSchema,
     }: {
-        data: TUserData;
-        modelDataSchema?: TUserDataSchema;
+        data: TUserParserInputData;
+        modelDataSchema?: TUserInputDataSchema;
     }) {
         super({ data, modelDataSchema });
     }

@@ -21,5 +21,5 @@ export const userDataSchema = z
     })
     .strict();
 
-export type TUserDataSchema = typeof userDataSchema;
-export type TUserData = z.infer<TUserDataSchema>;
+export type TUserInputDataSchema = typeof userDataSchema;
+export type TUserParserInputData = z.infer<TUserInputDataSchema>;

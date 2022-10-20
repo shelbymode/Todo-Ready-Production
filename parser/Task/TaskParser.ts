@@ -1,7 +1,7 @@
+import { TTaskParserInputData } from "~~/entity/Task/TaskEntity.types";
 import { CoreParser } from "../Core/CoreParser";
 import {
     TTaskOutputDataSchema,
-    TTaskParserInputData,
     TTaskParserOutputData,
     taskOutputDataSchema,
 } from "./TaskParser.types";

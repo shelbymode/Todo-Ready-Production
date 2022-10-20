@@ -20,3 +20,8 @@ export interface IUserAPI {
         user: TUserParserOutputData;
     }): AsyncData<unknown, true | { message: string; name: string }>;
 }
+
+/* export interface CommonAPI {
+    [key: string]
+}
+ */

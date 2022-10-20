@@ -1,7 +1,7 @@
+import { TUserParserInputData } from "~~/entity/User/UserEntity.types";
 import { CoreParser } from "../Core/CoreParser";
 import {
     TUserOutputDataSchema,
-    TUserParserInputData,
     TUserParserOutputData,
     userOutputDataSchema,
 } from "./UserParser.types";

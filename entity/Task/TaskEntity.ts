@@ -1,13 +1,20 @@
 import { CoreEntity } from "../Core/CoreEntity";
-import { TTaskDataSchema, TTaskData, taskDataSchema } from "./TaskEntity.types";
+import {
+    TTaskInputDataSchema,
+    TTaskParserInputData,
+    taskDataSchema,
+} from "./TaskEntity.types";
 
-export class TaskEntity extends CoreEntity<TTaskDataSchema, TTaskData> {
+export class TaskEntity extends CoreEntity<
+    TTaskInputDataSchema,
+    TTaskParserInputData
+> {
     constructor({
         data,
         modelDataSchema = taskDataSchema,
     }: {
-        data: TTaskData;
-        modelDataSchema?: TTaskDataSchema;
+        data: TTaskParserInputData;
+        modelDataSchema?: TTaskInputDataSchema;
     }) {
         super({ data, modelDataSchema });
     }
