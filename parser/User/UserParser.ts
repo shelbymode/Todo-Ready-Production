@@ -1,4 +1,4 @@
-import { AbstractParser } from "../Abstract/AbstractParser";
+import { CoreParser } from "../Core/CoreParser";
 import {
     TUserOutputDataSchema,
     TUserParserInputData,
@@ -6,12 +6,14 @@ import {
     userOutputDataSchema,
 } from "./UserParser.types";
 
-export class UserParser extends AbstractParser<
+export class UserParser extends CoreParser<
     TUserOutputDataSchema,
     TUserParserInputData,
     TUserParserOutputData
 > {
-    constructor() {
-        super(userOutputDataSchema);
+    constructor(
+        modelOutputDataSchema: TUserOutputDataSchema = userOutputDataSchema
+    ) {
+        super(modelOutputDataSchema);
     }
 }

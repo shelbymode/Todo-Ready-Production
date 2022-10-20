@@ -1,4 +1,4 @@
-import { AbstractParser } from "../Abstract/AbstractParser";
+import { CoreParser } from "../Core/CoreParser";
 import {
     TTaskOutputDataSchema,
     TTaskParserInputData,
@@ -6,7 +6,7 @@ import {
     taskOutputDataSchema,
 } from "./TaskParser.types";
 
-export class TaskParser extends AbstractParser<
+export class TaskParser extends CoreParser<
     TTaskOutputDataSchema,
     TTaskParserInputData,
     TTaskParserOutputData

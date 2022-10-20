@@ -11,7 +11,17 @@ export const userOutputDataSchema = z
         gender: z.nativeEnum(TEnumGender),
         role: z.nativeEnum(TEnumRole),
         tasks: z.string().optional().array().optional(),
-        createdAt: z.string().transform((val) => new Date(val)),
+        createdAt: z.string().transform((val, ctx) => {
+            const parsedDate = new Date(val);
+            if (isNaN(parsedDate.getDate())) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    message: "Date has invalid format",
+                });
+                return z.NEVER;
+            }
+            return parsedDate;
+        }),
     })
     .strict();
 

@@ -4,26 +4,35 @@ import { BASE_URL } from "~~/utils/constants";
 import { IUserAPI } from "./UserAPI.types";
 
 export class UserAPI implements IUserAPI {
-    getOneUser(id: string): AsyncData<unknown, true> {
+    getOneUser(
+        id: string
+    ): AsyncData<unknown, true | { message: string; name: string }> {
         return useFetch(`/users`, {
             method: "GET",
             baseURL: BASE_URL,
         });
     }
-    getAllUsers(): AsyncData<unknown, true> {
+    getAllUsers(): AsyncData<
+        unknown,
+        true | { message: string; name: string }
+    > {
         return useFetch(`/users`, {
             method: "GET",
             baseURL: BASE_URL,
         });
     }
-    createUser(user: TUserParserOutputData): AsyncData<unknown, true> {
+    createUser(
+        user: TUserParserOutputData
+    ): AsyncData<unknown, true | { message: string; name: string }> {
         return useFetch(`/users?createUser=true`, {
             method: "POST",
             baseURL: BASE_URL,
             body: user,
         });
     }
-    removeUser(id: string): AsyncData<unknown, true> {
+    removeUser(
+        id: string
+    ): AsyncData<unknown, true | { message: string; name: string }> {
         return useFetch(`/users/${id}`, {
             method: "DELETE",
             baseURL: BASE_URL,
@@ -35,7 +44,7 @@ export class UserAPI implements IUserAPI {
     }: {
         id: string;
         user: TUserParserOutputData;
-    }): AsyncData<unknown, true> {
+    }): AsyncData<unknown, true | { message: string; name: string }> {
         return useFetch(`/users/${id}`, {
             method: "PUT",
             baseURL: BASE_URL,

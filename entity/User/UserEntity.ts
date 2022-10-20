@@ -1,8 +1,14 @@
-import { AbstractEntity } from "../Abstract/AbstractEntity";
+import { CoreEntity } from "../Core/CoreEntity";
 import { TUserData, TUserDataSchema, userDataSchema } from "./UserEntity.types";
 
-export class UserEntity extends AbstractEntity<TUserDataSchema, TUserData> {
-    constructor(_data: TUserData) {
-        super({ _data, _modelDataSchema: userDataSchema });
+export class UserEntity extends CoreEntity<TUserDataSchema, TUserData> {
+    constructor({
+        data,
+        modelDataSchema = userDataSchema,
+    }: {
+        data: TUserData;
+        modelDataSchema?: TUserDataSchema;
+    }) {
+        super({ data, modelDataSchema });
     }
 }

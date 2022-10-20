@@ -7,7 +7,5 @@
         "*.css": "postcss"
     },
     "editor.formatOnSave": false,
-    "cSpell.words": [
-        "ICRUD"
-    ]
+    "cSpell.words": ["ICRUD"]
 }

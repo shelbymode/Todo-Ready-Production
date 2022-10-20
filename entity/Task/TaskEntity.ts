@@ -1,8 +1,14 @@
-import { AbstractEntity } from "../Abstract/AbstractEntity";
+import { CoreEntity } from "../Core/CoreEntity";
 import { TTaskDataSchema, TTaskData, taskDataSchema } from "./TaskEntity.types";
 
-export class TaskEntity extends AbstractEntity<TTaskDataSchema, TTaskData> {
-    constructor(_data: TTaskData) {
-        super({ _data, _modelDataSchema: taskDataSchema });
+export class TaskEntity extends CoreEntity<TTaskDataSchema, TTaskData> {
+    constructor({
+        data,
+        modelDataSchema = taskDataSchema,
+    }: {
+        data: TTaskData;
+        modelDataSchema?: TTaskDataSchema;
+    }) {
+        super({ data, modelDataSchema });
     }
 }
