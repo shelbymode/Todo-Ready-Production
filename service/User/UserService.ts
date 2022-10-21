@@ -13,6 +13,7 @@ import {
     TUserParserInputData,
 } from "~~/entity/User/UserEntity.types";
 import { IUserService } from "./UserService.types";
+import { ICRUDRepository } from "~~/shared/types";
 
 export class UserService
     extends ProcessService<
@@ -21,27 +22,25 @@ export class UserService
         TUserParserInputData,
         TUserParserOutputData
     >
-    implements IUserService
+    implements ICRUDRepository<TUserParserOutputData>, IUserService
 {
-    _httpService: HttpService;
-    _userAPI: UserAPI;
+    _httpService: HttpService = new HttpService();
+    _userAPI: UserAPI = new UserAPI();
     constructor() {
         super({
             modelParser: new UserParser(),
             ModelEntity: UserEntity,
         });
-        this._httpService = new HttpService();
-        this._userAPI = new UserAPI();
     }
-    async getOneUser(id: string) {
+    async getOne(id: string): Promise<TUserParserOutputData> {
         try {
-            // We can't know type from DB without run-time validation
+            // We can't know type (only expect!) from DB without run-time validation
             const fetchedData = await this._httpService.run({
                 apiCallback: () => this._userAPI.getOneUser(id),
             });
 
             //* Validate and transform data
-            const transformedData = this.processData(fetchedData);
+            const transformedData = this.processData(fetchedData as unknown);
             return transformedData;
         } catch (e) {
             logError(e);

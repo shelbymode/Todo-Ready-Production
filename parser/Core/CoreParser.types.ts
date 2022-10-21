@@ -1,4 +1,4 @@
-import { SafeParseReturnType, z, ZodType } from "zod";
+import { z, ZodType } from "zod";
 
 export interface ICoreParser<
     TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
@@ -6,5 +6,3 @@ export interface ICoreParser<
 > {
     parseTo(inputData: TModelParserInputData): TModelParserOutputData | never;
 }
-
-export type TParser<I, O> = (input: I) => SafeParseReturnType<I, O>;

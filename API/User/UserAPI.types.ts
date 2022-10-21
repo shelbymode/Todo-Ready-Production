@@ -1,27 +1,48 @@
 import { AsyncData } from "#app";
-import { TUserParserOutputData } from "~~/parser/User/UserParser.types";
+import { TUserParserInputData } from "~~/entity/User/UserEntity.types";
 
 export interface IUserAPI {
     getOneUser(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }>;
-    getAllUsers(): AsyncData<unknown, true | { message: string; name: string }>;
+    ): Promise<
+        AsyncData<
+            TUserParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
+    getAllUsers(): Promise<
+        AsyncData<
+            TUserParserInputData[],
+            true | { message: string; name: string }
+        >
+    >;
+
     createUser(
-        user: TUserParserOutputData
-    ): AsyncData<unknown, true | { message: string; name: string }>;
+        user: TUserParserInputData
+    ): Promise<
+        AsyncData<
+            TUserParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
     removeUser(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }>;
+    ): Promise<
+        AsyncData<
+            TUserParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
     editUser({
         id,
         user,
     }: {
         id: string;
-        user: TUserParserOutputData;
-    }): AsyncData<unknown, true | { message: string; name: string }>;
+        user: TUserParserInputData;
+    }): Promise<
+        AsyncData<
+            TUserParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
 }
-
-/* export interface CommonAPI {
-    [key: string]
-}
- */

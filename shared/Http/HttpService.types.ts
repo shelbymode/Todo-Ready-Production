@@ -1,13 +1,9 @@
-import { AsyncData } from "#app";
-
-export type TAPIResponse = (
-    ...args: any[]
-) => AsyncData<unknown, true | { message: string; name: string }>;
+import { TAPIResponse } from "../types";
 
 export interface IHttpService {
-    run({
+    run<T>({
         apiCallback,
     }: {
-        apiCallback: TAPIResponse;
+        apiCallback: TAPIResponse<T>;
     }): Promise<unknown | never>;
 }

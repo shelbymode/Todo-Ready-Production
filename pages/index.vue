@@ -3,7 +3,7 @@ import { UserService } from "~~/service/User/UserService";
 
 async function createUser() {
     const userService = new UserService();
-    const outputUser = await userService.getOneUser("111");
+    const outputUser = await userService.getOne("111");
 
     console.log("outputUser", outputUser);
 }

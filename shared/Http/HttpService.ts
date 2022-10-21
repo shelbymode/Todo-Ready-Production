@@ -1,13 +1,14 @@
 import { extractStatusCode } from "~~/utils/extractStatusCode";
 import { HttpError } from "../Error/HttpError";
-import { IHttpService, TAPIResponse } from "./HttpService.types";
+import { TAPIResponse } from "../types";
+import { IHttpService } from "./HttpService.types";
 
 export class HttpService implements IHttpService {
-    async run({
+    async run<T>({
         apiCallback,
     }: {
-        apiCallback: TAPIResponse;
-    }): Promise<unknown | never> {
+        apiCallback: TAPIResponse<T>;
+    }): Promise<T | never> {
         const { data: fetchedData, error } = await apiCallback();
 
         // Error during network request
