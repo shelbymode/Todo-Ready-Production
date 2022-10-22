@@ -7,11 +7,25 @@ export type TAPIResponse<T> = () => Promise<
 
 export type TParser<I, O> = (input: I) => SafeParseReturnType<I, O>;
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-export interface ICRUDRepository<O> {
-    getOne(data?: any): Promise<O | never>;
-    // getMany(data?: any): Promise<O | never>;
-    // create(data?: any): Promise<O | never>;
-    // edit(data?: any): Promise<O | never>;
-    // remove(data?: any): Promise<O | never>;
+export interface ICRUDRepository<TMPIData> {
+    getOne(
+        id: string
+    ): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
+    getMany(): Promise<
+        AsyncData<TMPIData[], true | { message: string; name: string }>
+    >;
+
+    create(
+        user: TMPIData
+    ): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
+    remove(
+        id: string
+    ): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
+    edit({
+        id,
+        user,
+    }: {
+        id: string;
+        user: TMPIData;
+    }): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
 }

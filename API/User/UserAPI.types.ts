@@ -1,8 +1,9 @@
 import { AsyncData } from "#app";
 import { TUserParserInputData } from "~~/entity/User/UserEntity.types";
+import { ICRUDRepository } from "~~/shared/types";
 
-export interface IUserAPI {
-    getOneUser(
+export interface IUserAPI extends ICRUDRepository<TUserParserInputData> {
+    getOne(
         id: string
     ): Promise<
         AsyncData<
@@ -10,14 +11,14 @@ export interface IUserAPI {
             true | { message: string; name: string }
         >
     >;
-    getAllUsers(): Promise<
+    getMany(): Promise<
         AsyncData<
             TUserParserInputData[],
             true | { message: string; name: string }
         >
     >;
 
-    createUser(
+    create(
         user: TUserParserInputData
     ): Promise<
         AsyncData<
@@ -25,7 +26,7 @@ export interface IUserAPI {
             true | { message: string; name: string }
         >
     >;
-    removeUser(
+    remove(
         id: string
     ): Promise<
         AsyncData<
@@ -33,7 +34,7 @@ export interface IUserAPI {
             true | { message: string; name: string }
         >
     >;
-    editUser({
+    edit({
         id,
         user,
     }: {

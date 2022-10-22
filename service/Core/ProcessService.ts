@@ -16,12 +16,12 @@ export class ProcessService<
             TModelParserOutputData
         >
 {
-    _modelParser: CoreParser<
+    modelParser: CoreParser<
         TModelOutputDataSchema,
         TModelParserInputData,
         TModelParserOutputData
     >;
-    _ModelEntity: typeof CoreEntity<
+    ModelEntity: typeof CoreEntity<
         TModelInputDataSchema,
         TModelParserInputData
     >;
@@ -40,17 +40,17 @@ export class ProcessService<
             TModelParserInputData
         >;
     }) {
-        this._modelParser = modelParser;
-        this._ModelEntity = ModelEntity;
+        this.modelParser = modelParser;
+        this.ModelEntity = ModelEntity;
     }
     processData(fetchedData: unknown) {
         // Run-time validation from DB (according to input data schema)
-        const validatedModel = new this._ModelEntity({
+        const validatedModel = new this.ModelEntity({
             data: fetchedData as TModelParserInputData,
         });
 
         // Transformation data (according to output data schema)
-        const transformedModel = this._modelParser.parseTo(validatedModel.data);
+        const transformedModel = this.modelParser.parseTo(validatedModel.data);
         return transformedModel;
     }
 }

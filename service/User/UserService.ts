@@ -1,42 +1,39 @@
 import { UserAPI } from "~~/API/User/UserAPI";
-import { UserParser } from "~~/parser/User/UserParser";
-import { HttpService } from "~~/shared/Http/HttpService";
-import { logError } from "~~/utils/logError";
 import { UserEntity } from "~~/entity/User/UserEntity";
-import { ProcessService } from "../Core/ProcessService";
-import {
-    TUserOutputDataSchema,
-    TUserParserOutputData,
-} from "~~/parser/User/UserParser.types";
 import {
     TUserInputDataSchema,
     TUserParserInputData,
 } from "~~/entity/User/UserEntity.types";
-import { IUserService } from "./UserService.types";
-import { ICRUDRepository } from "~~/shared/types";
+import { UserParser } from "~~/parser/User/UserParser";
+import {
+    TUserOutputDataSchema,
+    TUserParserOutputData,
+} from "~~/parser/User/UserParser.types";
+import { logError } from "~~/utils/logError";
+import { CoreService } from "../Core/CoreService";
+import { IUserServiceOperations } from "./IUserServiceOperations.types";
 
 export class UserService
-    extends ProcessService<
+    extends CoreService<
         TUserInputDataSchema,
         TUserOutputDataSchema,
         TUserParserInputData,
         TUserParserOutputData
     >
-    implements ICRUDRepository<TUserParserOutputData>, IUserService
+    implements IUserServiceOperations
 {
-    _httpService: HttpService = new HttpService();
-    _userAPI: UserAPI = new UserAPI();
     constructor() {
         super({
+            coreAPI: new UserAPI(),
             modelParser: new UserParser(),
             ModelEntity: UserEntity,
         });
     }
-    async getOne(id: string): Promise<TUserParserOutputData> {
+    async getUserById(id: string): Promise<TUserParserOutputData> {
         try {
             // We can't know type (only expect!) from DB without run-time validation
-            const fetchedData = await this._httpService.run({
-                apiCallback: () => this._userAPI.getOneUser(id),
+            const fetchedData = await this.httpService.run({
+                apiCallback: () => this.coreAPI.getOne(id),
             });
 
             //* Validate and transform data

@@ -8,12 +8,12 @@ export interface IProcessService<
     TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
     TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
 > {
-    _modelParser: CoreParser<
+    modelParser: CoreParser<
         TModelOutputDataSchema,
         TModelParserInputData,
         TModelParserOutputData
     >;
-    _ModelEntity: typeof CoreEntity<
+    ModelEntity: typeof CoreEntity<
         TModelInputDataSchema,
         TModelParserInputData
     >;

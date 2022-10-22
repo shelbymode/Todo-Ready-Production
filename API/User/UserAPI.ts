@@ -4,7 +4,7 @@ import { BASE_URL } from "~~/utils/constants";
 import { IUserAPI } from "./UserAPI.types";
 
 export class UserAPI implements IUserAPI {
-    async getOneUser(
+    async getOne(
         id: string
     ): Promise<
         AsyncData<
@@ -17,7 +17,7 @@ export class UserAPI implements IUserAPI {
             baseURL: BASE_URL,
         });
     }
-    async getAllUsers(): Promise<
+    async getMany(): Promise<
         AsyncData<
             TUserParserInputData[],
             true | { message: string; name: string }
@@ -31,7 +31,7 @@ export class UserAPI implements IUserAPI {
             true | { message: string; name: string }
         >;
     }
-    async createUser(
+    async create(
         user: TUserParserInputData
     ): Promise<
         AsyncData<
@@ -45,7 +45,7 @@ export class UserAPI implements IUserAPI {
             body: user,
         });
     }
-    async removeUser(
+    async remove(
         id: string
     ): Promise<
         AsyncData<
@@ -58,7 +58,7 @@ export class UserAPI implements IUserAPI {
             baseURL: BASE_URL,
         });
     }
-    async editUser({
+    async edit({
         id,
         user,
     }: {
