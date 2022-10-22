@@ -2,7 +2,7 @@ import { z, ZodType } from "zod";
 import { CoreEntity } from "~~/entity/Core/CoreEntity";
 import { CoreParser } from "~~/parser/Core/CoreParser";
 
-export interface IProcessServer<
+export interface IProcessService<
     TModelInputDataSchema extends ZodType<unknown, unknown, unknown>,
     TModelOutputDataSchema extends ZodType<unknown, unknown, unknown>,
     TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,

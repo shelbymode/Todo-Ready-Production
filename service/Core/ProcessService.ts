@@ -1,7 +1,7 @@
 import { ZodType, z } from "zod";
 import { CoreEntity } from "~~/entity/Core/CoreEntity";
 import { CoreParser } from "~~/parser/Core/CoreParser";
-import { IProcessServer } from "./ProcessService.types";
+import { IProcessService } from "./ProcessService.types";
 
 export class ProcessService<
     TModelInputDataSchema extends ZodType<unknown, unknown, unknown>,
@@ -9,7 +9,7 @@ export class ProcessService<
     TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
     TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
 > implements
-        IProcessServer<
+        IProcessService<
             TModelInputDataSchema,
             TModelOutputDataSchema,
             TModelParserInputData,

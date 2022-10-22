@@ -5,7 +5,12 @@ export class CoreParser<
     TModelOutputDataSchema extends ZodType<unknown, unknown, unknown>,
     TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
     TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
-> implements ICoreParser<TModelParserInputData, TModelParserOutputData>
+> implements
+        ICoreParser<
+            TModelOutputDataSchema,
+            TModelParserInputData,
+            TModelParserOutputData
+        >
 {
     _modelOutputDataSchema: TModelOutputDataSchema;
     constructor(modelOutputDataSchema: TModelOutputDataSchema) {

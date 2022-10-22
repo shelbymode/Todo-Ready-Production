@@ -1,4 +1,5 @@
 interface IHttpError extends Error {
-    status: number;
+    statusCode: number;
+    name: string;
     message: string;
 }

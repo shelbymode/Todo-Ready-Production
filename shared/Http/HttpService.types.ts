@@ -5,5 +5,5 @@ export interface IHttpService {
         apiCallback,
     }: {
         apiCallback: TAPIResponse<T>;
-    }): Promise<unknown | never>;
+    }): Promise<T | never>;
 }

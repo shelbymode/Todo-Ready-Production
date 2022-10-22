@@ -7,7 +7,7 @@ interface IHttpError {
 }
 
 export class HttpError extends Error implements IHttpError {
-    public statusCode: number;
+    statusCode: number;
 
     constructor({
         statusCode,
@@ -22,11 +22,11 @@ export class HttpError extends Error implements IHttpError {
         this.message = message || HttpStatusCode[statusCode];
     }
 
-    public isClientError(): boolean {
+    get isClientError(): boolean {
         return this.statusCode >= 400 && this.statusCode <= 499;
     }
 
-    public isServerError(): boolean {
+    get isServerError(): boolean {
         return this.statusCode >= 500 && this.statusCode <= 599;
     }
 }
