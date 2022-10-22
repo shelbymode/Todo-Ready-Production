@@ -60,10 +60,10 @@ export class UserAPI implements IUserAPI {
     }
     async edit({
         id,
-        user,
+        body,
     }: {
         id: string;
-        user: TUserParserInputData;
+        body: TUserParserInputData;
     }): Promise<
         AsyncData<
             TUserParserInputData,
@@ -73,7 +73,7 @@ export class UserAPI implements IUserAPI {
         return useFetch(`/users/${id}`, {
             method: "PUT",
             baseURL: BASE_URL,
-            body: user,
+            body: body,
         });
     }
 }

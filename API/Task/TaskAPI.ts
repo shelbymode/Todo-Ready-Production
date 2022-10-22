@@ -1,54 +1,82 @@
 import { AsyncData } from "#app";
-import { TTaskParserOutputData } from "~~/parser/Task/TaskParser.types";
+import { TTaskParserInputData } from "~~/entity/Task/TaskEntity.types";
 import { BASE_URL } from "~~/utils/constants";
 import { ITaskAPI } from "./TaskAPI.types";
 
 export class TaskAPI implements ITaskAPI {
-    getOneTask(
+    async getOne(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }> {
-        return useFetch(`/tasks/${id}`, {
-            method: "GET",
-            baseURL: BASE_URL,
-        });
-    }
-    getAllTasks(): AsyncData<
-        unknown,
-        true | { message: string; name: string }
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
     > {
         return useFetch(`/tasks`, {
             method: "GET",
             baseURL: BASE_URL,
         });
     }
-    createTask(
-        task: TTaskParserOutputData
-    ): AsyncData<unknown, true | { message: string; name: string }> {
+    async getMany(): Promise<
+        AsyncData<
+            TTaskParserInputData[],
+            true | { message: string; name: string }
+        >
+    > {
+        return useFetch(`/tasks`, {
+            method: "GET",
+            baseURL: BASE_URL,
+        }) as AsyncData<
+            TTaskParserInputData[],
+            true | { message: string; name: string }
+        >;
+    }
+    async create(
+        task: TTaskParserInputData
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    > {
         return useFetch(`/tasks?createTask=true`, {
             method: "POST",
             baseURL: BASE_URL,
             body: task,
         });
     }
-    removeTask(
+    async remove(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }> {
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    > {
         return useFetch(`/tasks/${id}`, {
             method: "DELETE",
             baseURL: BASE_URL,
         });
     }
-    editTask({
+    async edit({
         id,
-        task,
+        body,
     }: {
         id: string;
-        task: TTaskParserOutputData;
-    }): AsyncData<unknown, true | { message: string; name: string }> {
+        body: TTaskParserInputData;
+    }): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    > {
         return useFetch(`/tasks/${id}`, {
             method: "PUT",
             baseURL: BASE_URL,
-            body: task,
-        });
+            body: body,
+        }) as AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >;
     }
 }

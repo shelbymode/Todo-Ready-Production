@@ -36,10 +36,10 @@ export interface IUserAPI extends ICRUDRepository<TUserParserInputData> {
     >;
     edit({
         id,
-        user,
+        body,
     }: {
         id: string;
-        user: TUserParserInputData;
+        body: TUserParserInputData;
     }): Promise<
         AsyncData<
             TUserParserInputData,

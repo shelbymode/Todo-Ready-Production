@@ -23,9 +23,9 @@ export interface ICRUDRepository<TMPIData> {
     ): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
     edit({
         id,
-        user,
+        body,
     }: {
         id: string;
-        user: TMPIData;
+        body: TMPIData;
     }): Promise<AsyncData<TMPIData, true | { message: string; name: string }>>;
 }

@@ -1,22 +1,49 @@
 import { AsyncData } from "#app";
-import { TTaskParserOutputData } from "~~/parser/Task/TaskParser.types";
+import { TTaskParserInputData } from "~~/entity/Task/TaskEntity.types";
+import { ICRUDRepository } from "~~/shared/types";
 
-export interface ITaskAPI {
-    getOneTask(
+export interface ITaskAPI extends ICRUDRepository<TTaskParserInputData> {
+    getOne(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }>;
-    getAllTasks(): AsyncData<unknown, true | { message: string; name: string }>;
-    createTask(
-        task: TTaskParserOutputData
-    ): AsyncData<unknown, true | { message: string; name: string }>;
-    removeTask(
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
+    getMany(): Promise<
+        AsyncData<
+            TTaskParserInputData[],
+            true | { message: string; name: string }
+        >
+    >;
+
+    create(
+        task: TTaskParserInputData
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
+    remove(
         id: string
-    ): AsyncData<unknown, true | { message: string; name: string }>;
-    editTask({
+    ): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
+    edit({
         id,
-        task,
+        body,
     }: {
         id: string;
-        task: TTaskParserOutputData;
-    }): AsyncData<unknown, true | { message: string; name: string }>;
+        body: TTaskParserInputData;
+    }): Promise<
+        AsyncData<
+            TTaskParserInputData,
+            true | { message: string; name: string }
+        >
+    >;
 }

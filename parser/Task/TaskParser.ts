@@ -11,7 +11,9 @@ export class TaskParser extends CoreParser<
     TTaskParserInputData,
     TTaskParserOutputData
 > {
-    constructor() {
-        super(taskOutputDataSchema);
+    constructor(
+        modelOutputDataSchema: TTaskOutputDataSchema = taskOutputDataSchema
+    ) {
+        super(modelOutputDataSchema);
     }
 }

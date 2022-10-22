@@ -3,12 +3,8 @@ import { CoreEntity } from "~~/entity/Core/CoreEntity";
 import { CoreParser } from "~~/parser/Core/CoreParser";
 import { HttpService } from "~~/shared/Http/HttpService";
 import { ICRUDRepository } from "~~/shared/types";
+import { ICoreService } from "./CoreService.types";
 import { ProcessService } from "./ProcessService";
-
-export interface ICoreService<TMPIData> {
-    httpService: HttpService;
-    coreAPI: ICRUDRepository<TMPIData>;
-}
 
 export class CoreService<
         TMIDSchema extends ZodType<unknown, unknown, unknown>,

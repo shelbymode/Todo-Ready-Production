@@ -9,39 +9,35 @@ import {
     TTaskOutputDataSchema,
     TTaskParserOutputData,
 } from "~~/parser/Task/TaskParser.types";
-import { HttpService } from "~~/shared/Http/HttpService";
 import { logError } from "~~/utils/logError";
-import { ProcessService } from "../Core/ProcessService";
-import { ITaskService } from "./TaskService.types";
+import { CoreService } from "../Core/CoreService";
+import { ITaskServiceOperations } from "./ITaskServiceOperations.types";
 
 export class TaskService
-    extends ProcessService<
+    extends CoreService<
         TTaskInputDataSchema,
         TTaskOutputDataSchema,
         TTaskParserInputData,
         TTaskParserOutputData
     >
-    implements ITaskService
+    implements ITaskServiceOperations
 {
-    _httpService: HttpService;
-    _taskAPI: TaskAPI;
     constructor() {
         super({
+            coreAPI: new TaskAPI(),
             modelParser: new TaskParser(),
             ModelEntity: TaskEntity,
         });
-        this._httpService = new HttpService();
-        this._taskAPI = new TaskAPI();
     }
-    async getOneTask(id: string) {
+    async getTaskById(id: string): Promise<TTaskParserOutputData> {
         try {
-            // We can't know type from DB without run-time validation
-            const fetchedData = await this._httpService.run({
-                apiCallback: () => this._taskAPI.getOneTask(id),
+            // We can't know type (only expect!) from DB without run-time validation
+            const fetchedData = await this.httpService.run({
+                apiCallback: () => this.coreAPI.getOne(id),
             });
 
             //* Validate and transform data
-            const transformedData = this.processData(fetchedData);
+            const transformedData = this.processData(fetchedData as unknown);
             return transformedData;
         } catch (e) {
             logError(e);
