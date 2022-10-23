@@ -12,7 +12,7 @@ import {
     TTaskOutputDataSchema,
     TTaskParserOutputData,
 } from "../Parser/TaskParser.types";
-import { ITaskServiceOperations } from "./ITaskServiceOperations.types";
+import { ITaskServiceOperations } from "./TaskService.types";
 
 export class TaskService
     extends CoreService<
@@ -25,7 +25,7 @@ export class TaskService
 {
     constructor() {
         super({
-            coreAPI: new TaskAPI(),
+            fetchAPI: new TaskAPI(),
             modelParser: new TaskParser(),
             ModelEntity: TaskEntity,
         });
@@ -34,7 +34,7 @@ export class TaskService
         try {
             // We can't know type (only expect!) from DB without run-time validation
             const fetchedData = await this.httpService.run({
-                apiCallback: () => this.coreAPI.getOne(id),
+                apiCallback: () => this.fetchAPI.getOne(id),
             });
 
             //* Validate and transform data

@@ -2,24 +2,19 @@ import { SafeParseReturnType, z, ZodType } from "zod";
 import { ICoreParser } from "./CoreParser.types";
 
 export class CoreParser<
-    TModelOutputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
-    TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
-> implements
-        ICoreParser<
-            TModelOutputDataSchema,
-            TModelParserInputData,
-            TModelParserOutputData
-        >
+    TMODSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<ZodType<unknown, unknown, unknown>>,
+    TMPOData extends z.infer<ZodType<unknown, unknown, unknown>>
+> implements ICoreParser<TMODSchema, TMPIData, TMPOData>
 {
-    _modelOutputDataSchema: TModelOutputDataSchema;
-    constructor(modelOutputDataSchema: TModelOutputDataSchema) {
-        this._modelOutputDataSchema = modelOutputDataSchema;
+    modelOutputDataSchema: TMODSchema;
+    constructor(modelOutputDataSchema: TMODSchema) {
+        this.modelOutputDataSchema = modelOutputDataSchema;
     }
-    parseTo(inputData: TModelParserInputData) {
-        const transformedData = this._modelOutputDataSchema.safeParse(
+    toDomain(inputData: TMPIData) {
+        const transformedData = this.modelOutputDataSchema.safeParse(
             inputData
-        ) as SafeParseReturnType<TModelParserInputData, TModelParserOutputData>;
+        ) as SafeParseReturnType<TMPIData, TMPOData>;
 
         if (transformedData.success == false) throw transformedData.error;
         else return transformedData.data;

@@ -4,14 +4,15 @@ import { UserEntity } from "../../domain/entity/UserEntity";
 import {
     TUserInputDataSchema,
     TUserParserInputData,
-} from "../../domain/entity/UserEntity.types";
+} from "../../domain/validation/userDataSchema.types";
+
 import { UserAPI } from "../API/UserAPI";
 import { UserParser } from "../Parser/UserParser";
 import {
     TUserOutputDataSchema,
     TUserParserOutputData,
 } from "../Parser/UserParser.types";
-import { IUserServiceOperations } from "./IUserServiceOperations.types";
+import { IUserServiceOperations } from "./UserService.types";
 
 export class UserService
     extends CoreService<
@@ -24,7 +25,7 @@ export class UserService
 {
     constructor() {
         super({
-            coreAPI: new UserAPI(),
+            fetchAPI: new UserAPI(),
             modelParser: new UserParser(),
             ModelEntity: UserEntity,
         });
@@ -33,7 +34,7 @@ export class UserService
         try {
             // We can't know type (only expect!) from DB without run-time validation
             const fetchedData = await this.httpService.run({
-                apiCallback: () => this.coreAPI.getOne(id),
+                apiCallback: () => this.fetchAPI.getOne(id),
             });
 
             //* Validate and transform data

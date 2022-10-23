@@ -1,28 +1,24 @@
 import { ZodType, z } from "zod";
 import { HttpService } from "~~/app/shared/Http/HttpService";
-import { ICRUDRepository } from "~~/app/shared/types";
+import { ICRUDFetchRepository } from "~~/app/shared/types";
 import { CoreEntity } from "../../domain/entity/CoreEntity";
 import { CoreParser } from "../Parser/CoreParser";
-import { ICoreService } from "./CoreService.types";
 import { ProcessService } from "./ProcessService";
 
 export class CoreService<
-        TMIDSchema extends ZodType<unknown, unknown, unknown>,
-        TMODSchema extends ZodType<unknown, unknown, unknown>,
-        TMPIData extends z.infer<ZodType<unknown, unknown, unknown>>,
-        TMPOData extends z.infer<ZodType<unknown, unknown, unknown>>
-    >
-    extends ProcessService<TMIDSchema, TMODSchema, TMPIData, TMPOData>
-    implements ICoreService<TMPIData>
-{
-    httpService: HttpService = new HttpService();
-    coreAPI: ICRUDRepository<TMPIData>;
+    TMIDSchema extends ZodType<unknown, unknown, unknown>,
+    TMODSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<ZodType<unknown, unknown, unknown>>,
+    TMPOData extends z.infer<ZodType<unknown, unknown, unknown>>
+> extends ProcessService<TMIDSchema, TMODSchema, TMPIData, TMPOData> {
+    protected httpService: HttpService = new HttpService();
+    protected fetchAPI: ICRUDFetchRepository<TMPIData>;
     constructor({
-        coreAPI,
+        fetchAPI,
         modelParser,
         ModelEntity,
     }: {
-        coreAPI: ICRUDRepository<TMPIData>;
+        fetchAPI: ICRUDFetchRepository<TMPIData>;
         modelParser: CoreParser<TMODSchema, TMPIData, TMPOData>;
         ModelEntity: typeof CoreEntity<TMIDSchema, TMPIData>;
     }) {
@@ -30,6 +26,6 @@ export class CoreService<
             modelParser,
             ModelEntity,
         });
-        this.coreAPI = coreAPI;
+        this.fetchAPI = fetchAPI;
     }
 }

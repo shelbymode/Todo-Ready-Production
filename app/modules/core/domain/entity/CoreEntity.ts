@@ -2,13 +2,13 @@ import { z, ZodType } from "zod";
 import { ICoreEntity } from "./CoreEntity.types";
 
 export class CoreEntity<
-    TModelInputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelParserInputData extends z.infer<TModelInputDataSchema>
-> implements ICoreEntity<TModelInputDataSchema, TModelParserInputData>
+    TMIDSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<TMIDSchema>
+> implements ICoreEntity<TMIDSchema, TMPIData>
 {
-    data: TModelParserInputData;
-    modelDataSchema: TModelInputDataSchema;
-    validate(data: TModelParserInputData) {
+    data: TMPIData;
+    modelDataSchema: TMIDSchema;
+    validate(data: TMPIData) {
         return this.modelDataSchema.safeParse(data);
     }
 
@@ -16,8 +16,8 @@ export class CoreEntity<
         data,
         modelDataSchema,
     }: {
-        data: TModelParserInputData;
-        modelDataSchema?: TModelInputDataSchema;
+        data: TMPIData;
+        modelDataSchema?: TMIDSchema;
     }) {
         this.modelDataSchema = modelDataSchema;
 

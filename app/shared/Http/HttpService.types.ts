@@ -4,6 +4,6 @@ export interface IHttpService {
     run<T>({
         apiCallback,
     }: {
-        apiCallback: TAPIResponse<T>;
+        apiCallback: () => TAPIResponse<T>;
     }): Promise<T | never>;
 }

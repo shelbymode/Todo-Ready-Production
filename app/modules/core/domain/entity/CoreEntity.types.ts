@@ -1,12 +1,12 @@
 import { z, ZodType } from "zod";
 
 export interface ICoreEntity<
-    TModelInputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelParserInputData extends z.infer<TModelInputDataSchema>
+    TMIDSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<TMIDSchema>
 > {
-    modelDataSchema: TModelInputDataSchema;
-    data: TModelParserInputData;
+    modelDataSchema: TMIDSchema;
+    data: TMPIData;
     validate(
-        data: TModelParserInputData
+        data: TMPIData
     ): z.SafeParseReturnType<unknown, unknown>;
 }

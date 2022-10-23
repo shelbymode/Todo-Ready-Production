@@ -1,56 +1,34 @@
 import { ZodType, z } from "zod";
 import { CoreEntity } from "../../domain/entity/CoreEntity";
 import { CoreParser } from "../Parser/CoreParser";
-import { IProcessService } from "./ProcessService.types";
 
 export class ProcessService<
-    TModelInputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelOutputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
-    TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
-> implements
-        IProcessService<
-            TModelInputDataSchema,
-            TModelOutputDataSchema,
-            TModelParserInputData,
-            TModelParserOutputData
-        >
-{
-    modelParser: CoreParser<
-        TModelOutputDataSchema,
-        TModelParserInputData,
-        TModelParserOutputData
-    >;
-    ModelEntity: typeof CoreEntity<
-        TModelInputDataSchema,
-        TModelParserInputData
-    >;
+    TMIDSchema extends ZodType<unknown, unknown, unknown>,
+    TMODSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<ZodType<unknown, unknown, unknown>>,
+    TMPOData extends z.infer<ZodType<unknown, unknown, unknown>>
+> {
+    protected readonly modelParser: CoreParser<TMODSchema, TMPIData, TMPOData>;
+    protected readonly ModelEntity: typeof CoreEntity<TMIDSchema, TMPIData>;
 
     constructor({
         modelParser,
         ModelEntity,
     }: {
-        modelParser: CoreParser<
-            TModelOutputDataSchema,
-            TModelParserInputData,
-            TModelParserOutputData
-        >;
-        ModelEntity: typeof CoreEntity<
-            TModelInputDataSchema,
-            TModelParserInputData
-        >;
+        modelParser: CoreParser<TMODSchema, TMPIData, TMPOData>;
+        ModelEntity: typeof CoreEntity<TMIDSchema, TMPIData>;
     }) {
         this.modelParser = modelParser;
         this.ModelEntity = ModelEntity;
     }
-    processData(fetchedData: unknown) {
+    protected processData(fetchedData: unknown) {
         // Run-time validation from DB (according to input data schema)
         const validatedModel = new this.ModelEntity({
-            data: fetchedData as TModelParserInputData,
+            data: fetchedData as TMPIData,
         });
 
         // Transformation data (according to output data schema)
-        const transformedModel = this.modelParser.parseTo(validatedModel.data);
+        const transformedModel = this.modelParser.toDomain(validatedModel.data);
         return transformedModel;
     }
 }

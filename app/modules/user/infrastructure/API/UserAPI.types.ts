@@ -1,49 +1,17 @@
-import { AsyncData } from "#app";
-import { ICRUDRepository } from "~~/app/shared/types";
+import { ICRUDFetchRepository, TAPIResponse } from "~~/app/shared/types";
 import { TUserParserInputData } from "../../domain/validation/userDataSchema.types";
 
-export interface IUserAPI extends ICRUDRepository<TUserParserInputData> {
-    getOne(
-        id: string
-    ): Promise<
-        AsyncData<
-            TUserParserInputData,
-            true | { message: string; name: string }
-        >
-    >;
-    getMany(): Promise<
-        AsyncData<
-            TUserParserInputData[],
-            true | { message: string; name: string }
-        >
-    >;
+export interface IUserAPI extends ICRUDFetchRepository<TUserParserInputData> {
+    getOne(id: string): TAPIResponse<TUserParserInputData>;
+    getMany(): TAPIResponse<TUserParserInputData[]>;
 
-    create(
-        user: TUserParserInputData
-    ): Promise<
-        AsyncData<
-            TUserParserInputData,
-            true | { message: string; name: string }
-        >
-    >;
-    remove(
-        id: string
-    ): Promise<
-        AsyncData<
-            TUserParserInputData,
-            true | { message: string; name: string }
-        >
-    >;
+    create(user: TUserParserInputData): TAPIResponse<TUserParserInputData>;
+    remove(id: string): TAPIResponse<TUserParserInputData>;
     edit({
         id,
         body,
     }: {
         id: string;
         body: TUserParserInputData;
-    }): Promise<
-        AsyncData<
-            TUserParserInputData,
-            true | { message: string; name: string }
-        >
-    >;
+    }): TAPIResponse<TUserParserInputData>;
 }

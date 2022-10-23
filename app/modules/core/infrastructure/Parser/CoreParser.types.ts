@@ -1,10 +1,10 @@
 import { z, ZodType } from "zod";
 
 export interface ICoreParser<
-    TModelOutputDataSchema extends ZodType<unknown, unknown, unknown>,
-    TModelParserInputData extends z.infer<ZodType<unknown, unknown, unknown>>,
-    TModelParserOutputData extends z.infer<ZodType<unknown, unknown, unknown>>
+    TMODSchema extends ZodType<unknown, unknown, unknown>,
+    TMPIData extends z.infer<ZodType<unknown, unknown, unknown>>,
+    TMPOData extends z.infer<ZodType<unknown, unknown, unknown>>
 > {
-    _modelOutputDataSchema: TModelOutputDataSchema;
-    parseTo(inputData: TModelParserInputData): TModelParserOutputData | never;
+    modelOutputDataSchema: TMODSchema;
+    toDomain(inputData: TMPIData): TMPOData | never;
 }

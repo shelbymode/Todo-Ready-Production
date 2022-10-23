@@ -6,7 +6,7 @@ export class HttpService implements IHttpService {
     async run<T>({
         apiCallback,
     }: {
-        apiCallback: TAPIResponse<T>;
+        apiCallback: () => TAPIResponse<T>;
     }): Promise<T | never> {
         const { data: fetchedData, error } = await apiCallback();
 
