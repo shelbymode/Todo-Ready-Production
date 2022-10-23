@@ -1,19 +1,12 @@
 <script setup lang="ts">
-import { TaskService } from "~~/service/Task/TaskService";
-import { UserService } from "~~/service/User/UserService";
+import { UserService } from "~~/app/modules/user/infrastructure/Service/UserService";
 
 async function createUser() {
     const userService = new UserService();
-    const taskService = new TaskService();
 
     const outputUser = await userService.getUserById("111");
 
     console.log("outputUser", outputUser);
-    console.log("taskService", taskService);
-
-    const outputTask = await taskService.getTaskById("111");
-
-    console.log(outputTask);
 }
 </script>
 
