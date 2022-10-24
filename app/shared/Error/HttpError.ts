@@ -1,12 +1,6 @@
-import { HttpStatusCode } from "./HttpStatusCode";
+import { HttpStatusCode } from "../Http/HttpStatusCode";
 
-interface IHttpError {
-    statusCode: number;
-    name: string;
-    message: string;
-}
-
-export class HttpError extends Error implements IHttpError {
+export class HttpError extends Error {
     statusCode: number;
 
     constructor({
@@ -17,6 +11,7 @@ export class HttpError extends Error implements IHttpError {
         message?: string;
     }) {
         super(message);
+
         this.statusCode = statusCode;
         this.name = HttpStatusCode[statusCode];
         this.message = message || HttpStatusCode[statusCode];

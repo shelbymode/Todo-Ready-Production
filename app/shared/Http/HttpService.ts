@@ -1,27 +1,22 @@
-import { TAPIResponse } from "../types";
-import { HttpError } from "./HttpError";
+import { HttpError } from "../Error/HttpError";
+import { FetchResult, TAPIResponse } from "../types";
 import { IHttpService } from "./HttpService.types";
+import { err, ok } from "neverthrow";
 
 export class HttpService implements IHttpService {
-    async run<T>({
-        apiCallback,
-    }: {
-        apiCallback: () => TAPIResponse<T>;
-    }): Promise<T | never> {
+    async run<T>(apiCallback: () => TAPIResponse<T>): FetchResult<T> {
         const { data: fetchedData, error } = await apiCallback();
 
         // Error during network request
-        if (error.value)
-            throw new HttpError({
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore bag?
-                statusCode: extractStatusCode(error.value?.message),
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                //@ts-ignore bag?
-                message: error.value?.name,
-            });
+        if (error.value) {
+            return err(
+                new HttpError({
+                    message: error.value.data.message,
+                    statusCode: error.value.data.statusCode,
+                })
+            );
+        }
 
-        /// IDK really is it true approach or should be input data type :(
-        return fetchedData.value;
+        return ok(fetchedData.value);
     }
 }

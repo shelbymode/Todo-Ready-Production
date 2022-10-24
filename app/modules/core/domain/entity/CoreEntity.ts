@@ -1,4 +1,4 @@
-import { z, ZodType } from "zod";
+import { z, ZodError, ZodType } from "zod";
 import { ICoreEntity } from "./CoreEntity.types";
 
 export class CoreEntity<
@@ -7,6 +7,7 @@ export class CoreEntity<
 > implements ICoreEntity<TMIDSchema, TMPIData>
 {
     data: TMPIData;
+    err: ZodError<unknown>;
     modelDataSchema: TMIDSchema;
     validate(data: TMPIData) {
         return this.modelDataSchema.safeParse(data);
@@ -25,7 +26,8 @@ export class CoreEntity<
         if (validateResult.success === true) {
             this.data = data;
         } else {
-            throw validateResult.error;
+            this.err = validateResult.error;
         }
+        return this;
     }
 }

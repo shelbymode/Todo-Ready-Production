@@ -1,11 +1,19 @@
 import { AsyncData } from "#app";
+import { Result } from "neverthrow";
 import { SafeParseReturnType } from "zod";
-
-export type TAPIResponse<T> = Promise<
-    AsyncData<T, true | { message: string; name: string }>
->;
+import { HttpError } from "../Error/HttpError";
+import { ParseError } from "../Error/ParseError";
+import { ValidationError } from "../Error/ValidationError";
+export type CustomError = { data: { message: string; statusCode: number } };
+export type TAPIResponse<Data, Error = CustomError> = AsyncData<Data, Error>;
 
 export type TParser<I, O> = (input: I) => SafeParseReturnType<I, O>;
+
+export type FetchResult<T> = Promise<Result<T, HttpError>>;
+export type TransformResult<O> = O | ValidationError | ParseError;
+export type EndResult<O> = Promise<
+    O | HttpError | ValidationError | ParseError
+>;
 
 export interface ICRUDFetchRepository<TMPIData> {
     getOne(id: string): TAPIResponse<TMPIData>;

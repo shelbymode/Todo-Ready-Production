@@ -1,4 +1,6 @@
+import { err, ok, Result } from "neverthrow";
 import { SafeParseReturnType, z, ZodType } from "zod";
+import { ParseError } from "~~/app/shared/Error/ParseError";
 import { ICoreParser } from "./CoreParser.types";
 
 export class CoreParser<
@@ -11,12 +13,13 @@ export class CoreParser<
     constructor(modelOutputDataSchema: TMODSchema) {
         this.modelOutputDataSchema = modelOutputDataSchema;
     }
-    toDomain(inputData: TMPIData) {
+    toDomain(inputData: TMPIData): Result<TMPOData, ParseError> {
         const transformedData = this.modelOutputDataSchema.safeParse(
             inputData
         ) as SafeParseReturnType<TMPIData, TMPOData>;
 
-        if (transformedData.success == false) throw transformedData.error;
-        else return transformedData.data;
+        if (transformedData.success == false) {
+            return err(new ParseError(transformedData.error.issues));
+        } else return ok(transformedData.data);
     }
 }

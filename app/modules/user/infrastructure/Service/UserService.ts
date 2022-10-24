@@ -1,5 +1,5 @@
 import { CoreService } from "~~/app/modules/core/infrastructure/Service/CoreService";
-import { logError } from "~~/app/shared/utils/logError";
+import { EndResult } from "~~/app/shared/types";
 import { UserEntity } from "../../domain/entity/UserEntity";
 import {
     TUserInputDataSchema,
@@ -30,18 +30,17 @@ export class UserService
             ModelEntity: UserEntity,
         });
     }
-    async getUserById(id: string): Promise<TUserParserOutputData> {
-        try {
-            // We can't know type (only expect!) from DB without run-time validation
-            const fetchedData = await this.httpService.run({
-                apiCallback: () => this.fetchAPI.getOne(id),
-            });
+    async getUserById(id: string): EndResult<TUserParserOutputData> {
+        // We can't know type (only expect!) from DB without run-time validation
+        const fetchedData = await this.httpService.run(() =>
+            this.fetchAPI.getOne(id)
+        );
 
-            //* Validate and transform data
-            const transformedData = this.processData(fetchedData as unknown);
-            return transformedData;
-        } catch (e) {
-            logError(e);
-        }
+        //* Validate and transform data
+        if (fetchedData.isOk()) {
+            const transformedData = this.processData(fetchedData.value);
+            if (transformedData.isOk()) return transformedData.value;
+            else return transformedData.error;
+        } else return fetchedData.error;
     }
 }

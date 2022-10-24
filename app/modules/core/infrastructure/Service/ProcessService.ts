@@ -1,4 +1,7 @@
+import { ok, err, Result, Err, Ok } from "neverthrow";
 import { ZodType, z } from "zod";
+import { ParseError } from "~~/app/shared/Error/ParseError";
+import { ValidationError } from "~~/app/shared/Error/ValidationError";
 import { CoreEntity } from "../../domain/entity/CoreEntity";
 import { CoreParser } from "../Parser/CoreParser";
 
@@ -21,14 +24,35 @@ export class ProcessService<
         this.modelParser = modelParser;
         this.ModelEntity = ModelEntity;
     }
-    protected processData(fetchedData: unknown) {
-        // Run-time validation from DB (according to input data schema)
+    private validateModel(
+        fetchedData: TMPIData
+    ): Result<TMPIData, ValidationError> {
         const validatedModel = new this.ModelEntity({
-            data: fetchedData as TMPIData,
+            data: fetchedData,
         });
 
+        if (validatedModel.err) {
+            return err(new ValidationError(validatedModel.err.issues));
+        }
+        return ok(validatedModel.data);
+    }
+    private transformData(validatedData: TMPIData) {
+        return this.modelParser.toDomain(validatedData);
+    }
+    protected processData(
+        fetchedData: TMPIData
+    ):
+        | Ok<TMPOData, never>
+        | Err<TMPIData, ValidationError>
+        | Err<TMPOData, ParseError> {
+        // Run-time validation from DB (according to input data schema)
+        const validatedData = this.validateModel(fetchedData);
+        if (validatedData.isErr()) return validatedData;
+
         // Transformation data (according to output data schema)
-        const transformedModel = this.modelParser.toDomain(validatedModel.data);
-        return transformedModel;
+        const transformedData = this.transformData(validatedData.value);
+        if (transformedData.isErr()) return transformedData;
+
+        return ok(transformedData.value);
     }
 }

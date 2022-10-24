@@ -3,10 +3,9 @@ import { UserService } from "~~/app/modules/user/infrastructure/Service/UserServ
 
 async function createUser() {
     const userService = new UserService();
-    // userService.
     const outputUser = await userService.getUserById("111");
 
-    console.log("outputUser", outputUser);
+    console.log("outputUser:", outputUser);
 }
 </script>
 

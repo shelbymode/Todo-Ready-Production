@@ -4,7 +4,6 @@ import { TUserParserInputData } from "../../domain/validation/userDataSchema.typ
 export interface IUserAPI extends ICRUDFetchRepository<TUserParserInputData> {
     getOne(id: string): TAPIResponse<TUserParserInputData>;
     getMany(): TAPIResponse<TUserParserInputData[]>;
-
     create(user: TUserParserInputData): TAPIResponse<TUserParserInputData>;
     remove(id: string): TAPIResponse<TUserParserInputData>;
     edit({
