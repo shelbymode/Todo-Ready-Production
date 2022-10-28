@@ -1,10 +1,10 @@
+import { HttpError } from "~~/app/shared/Error/HttpError";
+
 export default defineEventHandler(() => {
     const a = 2;
 
     if (a === 3)
-        return new Error("Fetching error", {
-            cause: 500,
-        });
+        return new HttpError({ statusCode: 402, message: "Some error" });
     return {
         id: "111",
         name: "andrew",
