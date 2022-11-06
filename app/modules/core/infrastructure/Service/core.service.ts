@@ -1,9 +1,9 @@
 import { ZodType, z } from "zod";
-import { HttpService } from "~~/app/shared/Http/HttpService";
+import { HttpService } from "~~/app/shared/Http/http.service";
 import { ICRUDFetchRepository } from "~~/app/shared/types";
-import { CoreEntity } from "../../domain/entity/CoreEntity";
-import { CoreParser } from "../Parser/CoreParser";
-import { ProcessService } from "./ProcessService";
+import { CoreEntity } from "../../domain/core.entity";
+import { CoreParser } from "../Parser/core.parser";
+import { ProcessService } from "./process.service";
 
 export class CoreService<
     TMIDSchema extends ZodType<unknown, unknown, unknown>,

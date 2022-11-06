@@ -1,4 +1,4 @@
-import { CoreParser } from "~~/app/modules/core/infrastructure/Parser/CoreParser";
+import { CoreParser } from "~~/app/modules/core/infrastructure/Parser/core.parser";
 import { TTaskParserInputData } from "../../domain/validation/taskDataSchema.types";
 import {
     TTaskOutputDataSchema,

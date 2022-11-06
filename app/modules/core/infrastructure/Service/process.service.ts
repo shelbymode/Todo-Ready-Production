@@ -1,9 +1,9 @@
 import { ok, err, Result, Err, Ok } from "neverthrow";
 import { ZodType, z } from "zod";
-import { ParseError } from "~~/app/shared/Error/ParseError";
-import { ValidationError } from "~~/app/shared/Error/ValidationError";
-import { CoreEntity } from "../../domain/entity/CoreEntity";
-import { CoreParser } from "../Parser/CoreParser";
+import { ParseError } from "~~/app/shared/Error/parse.error";
+import { ValidationError } from "~~/app/shared/Error/validation.error";
+import { CoreEntity } from "../../domain/core.entity";
+import { CoreParser } from "../Parser/core.parser";
 
 export class ProcessService<
     TMIDSchema extends ZodType<unknown, unknown, unknown>,

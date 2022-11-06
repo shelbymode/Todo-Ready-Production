@@ -1,4 +1,4 @@
-import { HttpError } from "~~/app/shared/Error/HttpError";
+import { HttpError } from "~~/app/shared/Error/http.error";
 
 export default defineEventHandler(() => {
     const a = 2;

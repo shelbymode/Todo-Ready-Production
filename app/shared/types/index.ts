@@ -1,9 +1,8 @@
 import { AsyncData } from "#app";
 import { Result } from "neverthrow";
 import { SafeParseReturnType } from "zod";
-import { HttpError } from "../Error/HttpError";
-import { ParseError } from "../Error/ParseError";
-import { ValidationError } from "../Error/ValidationError";
+import { HttpError } from "../../Error/http.errorimport { ParseError } from "../Error/ParseError";
+import { ValidationError } from "../Error/validation.error";
 export type CustomError = { data: { message: string; statusCode: number } };
 export type TAPIResponse<Data, Error = CustomError> = AsyncData<Data, Error>;
 

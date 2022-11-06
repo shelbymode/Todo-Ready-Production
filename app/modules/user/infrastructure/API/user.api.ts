@@ -1,7 +1,7 @@
 import { TAPIResponse } from "~~/app/shared/types";
 import { BASE_URL } from "~~/app/shared/utils/constants";
 import { TUserParserInputData } from "../../domain/validation/userDataSchema.types";
-import { IUserAPI } from "./UserAPI.types";
+import { IUserAPI } from "./user.api.types";
 
 export class UserAPI implements IUserAPI {
     getOne(id: string) {

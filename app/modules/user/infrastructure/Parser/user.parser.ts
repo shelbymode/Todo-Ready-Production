@@ -1,10 +1,10 @@
-import { CoreParser } from "~~/app/modules/core/infrastructure/Parser/CoreParser";
+import { CoreParser } from "~~/app/modules/core/infrastructure/Parser/core.parser";
 import { TUserParserInputData } from "../../domain/validation/userDataSchema.types";
 import {
     TUserOutputDataSchema,
     TUserParserOutputData,
     userOutputDataSchema,
-} from "./UserParser.types";
+} from "./user.parser.types";
 
 export class UserParser extends CoreParser<
     TUserOutputDataSchema,

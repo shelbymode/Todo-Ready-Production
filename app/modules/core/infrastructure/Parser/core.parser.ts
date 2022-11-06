@@ -1,7 +1,7 @@
 import { err, ok, Result } from "neverthrow";
 import { SafeParseReturnType, z, ZodType } from "zod";
-import { ParseError } from "~~/app/shared/Error/ParseError";
-import { ICoreParser } from "./CoreParser.types";
+import { ParseError } from "~~/app/shared/Error/parse.error";
+import { ICoreParser } from "./core.parser.types";
 
 export class CoreParser<
     TMODSchema extends ZodType<unknown, unknown, unknown>,

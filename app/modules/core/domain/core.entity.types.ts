@@ -5,7 +5,7 @@ export interface ICoreEntity<
     TMPIData extends z.infer<TMIDSchema>
 > {
     modelDataSchema: TMIDSchema;
-    err: ZodError<unknown>;
-    data: TMPIData;
+    err?: ZodError<unknown>;
+    data?: TMPIData;
     validate(data: TMPIData): z.SafeParseReturnType<unknown, unknown>;
 }

@@ -1,13 +1,13 @@
 import { z, ZodError, ZodType } from "zod";
-import { ICoreEntity } from "./CoreEntity.types";
+import { ICoreEntity } from "./core.entity.types";
 
 export class CoreEntity<
     TMIDSchema extends ZodType<unknown, unknown, unknown>,
     TMPIData extends z.infer<TMIDSchema>
 > implements ICoreEntity<TMIDSchema, TMPIData>
 {
-    data: TMPIData;
-    err: ZodError<unknown>;
+    data?: TMPIData;
+    err?: ZodError<unknown>;
     modelDataSchema: TMIDSchema;
     validate(data: TMPIData) {
         return this.modelDataSchema.safeParse(data);

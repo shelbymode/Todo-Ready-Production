@@ -1,14 +1,14 @@
-import { HttpError } from "~~/app/shared/Error/HttpError";
-import { ParseError } from "~~/app/shared/Error/ParseError";
-import { ValidationError } from "~~/app/shared/Error/ValidationError";
-import { EndResult } from "~~/app/shared/types";
+import { HttpError } from "~~/app/shared/Error/http.error";
+import { ParseError } from "~~/app/shared/Error/parse.error";
+import { ValidationError } from "~~/app/shared/Error/validation.error";
+import { IExecutor, IUseCaseCallbacks } from "./core.usecase.types";
 
-import { IUseCaseCallbacks } from "./UseCase.types";
-
-export abstract class UseCase<TModelParserOutputData> {
-    abstract getResult(...args: any[]): EndResult<TModelParserOutputData>;
+export class UseCaseCore<TInputArgs, TModelParserOutputData> {
+    constructor(
+        public executor: IExecutor<TInputArgs, TModelParserOutputData>
+    ) {}
     async execute(
-        id: string,
+        args: TInputArgs,
         {
             respondWithSuccess,
             respondWithClientError,
@@ -17,7 +17,7 @@ export abstract class UseCase<TModelParserOutputData> {
             respondWithValidationError,
         }: IUseCaseCallbacks<TModelParserOutputData>
     ) {
-        const result = await this.getResult(id);
+        const result = await this.executor(args);
         if (result instanceof HttpError) {
             if (result.isClientError) {
                 respondWithClientError(result);

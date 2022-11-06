@@ -1,18 +1,18 @@
-import { CoreService } from "~~/app/modules/core/infrastructure/Service/CoreService";
+import { CoreService } from "~~/app/modules/core/infrastructure/Service/core.service";
 import { EndResult } from "~~/app/shared/types";
-import { UserEntity } from "../../domain/entity/UserEntity";
+import { UserEntity } from "../../domain/user.entity";
+import { IUserRepository } from "../../domain/user.repository";
 import {
     TUserInputDataSchema,
     TUserParserInputData,
 } from "../../domain/validation/userDataSchema.types";
 
-import { UserAPI } from "../API/UserAPI";
-import { UserParser } from "../Parser/UserParser";
+import { UserAPI } from "../API/user.api";
+import { UserParser } from "../Parser/user.parser";
 import {
     TUserOutputDataSchema,
     TUserParserOutputData,
-} from "../Parser/UserParser.types";
-import { IUserServiceOperations } from "./UserService.types";
+} from "../Parser/user.parser.types";
 
 export class UserService
     extends CoreService<
@@ -21,7 +21,7 @@ export class UserService
         TUserParserInputData,
         TUserParserOutputData
     >
-    implements IUserServiceOperations
+    implements IUserRepository
 {
     constructor() {
         super({

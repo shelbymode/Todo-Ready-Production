@@ -1,6 +1,6 @@
 import { Result } from "neverthrow";
 import { z, ZodType } from "zod";
-import { ParseError } from "~~/app/shared/Error/ParseError";
+import { ParseError } from "~~/app/shared/Error/parse.error";
 
 export interface ICoreParser<
     TMODSchema extends ZodType<unknown, unknown, unknown>,

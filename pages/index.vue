@@ -1,26 +1,29 @@
 <script setup lang="ts">
-import { GetOneUser } from "~~/app/modules/user/usecase/GetOneUser.uc";
+import { GetOneUser } from "~~/app/modules/user/application/GetOneUser.usecase";
 import { logError } from "~~/app/shared/utils/logError";
 
 async function createUser() {
     const getOneUser = new GetOneUser();
-    getOneUser.execute("111", {
-        respondWithSuccess(data) {
-            console.log("Result: ", data);
-        },
-        respondWithClientError(clientError) {
-            logError(clientError, "Client error");
-        },
-        respondWithServerError(serverError) {
-            logError(serverError, "Server error");
-        },
-        respondWithValidationError(validationError) {
-            logError(validationError, "Validation error");
-        },
-        respondWithParseError(parseError) {
-            logError(parseError, "Parse error");
-        },
-    });
+    getOneUser.execute(
+        { id: "22" },
+        {
+            respondWithSuccess(data) {
+                console.log("Result: ", data);
+            },
+            respondWithClientError(clientError) {
+                logError(clientError, "Client error");
+            },
+            respondWithServerError(serverError) {
+                logError(serverError, "Server error");
+            },
+            respondWithValidationError(validationError) {
+                logError(validationError, "Validation error");
+            },
+            respondWithParseError(parseError) {
+                logError(parseError, "Parse error");
+            },
+        }
+    );
 }
 </script>
 

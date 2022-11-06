@@ -1,4 +1,4 @@
-import { CoreEntity } from "~~/app/modules/core/domain/entity/CoreEntity";
+import { CoreEntity } from "~~/app/modules/core/domain/core.entity";
 import { taskDataSchema } from "../validation/taskDataSchema";
 import {
     TTaskInputDataSchema,

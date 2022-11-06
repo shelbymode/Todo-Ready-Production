@@ -1,4 +1,4 @@
-import { CoreService } from "~~/app/modules/core/infrastructure/Service/CoreService";
+import { CoreService } from "~~/app/modules/core/infrastructure/Service/core.service";
 import { logError } from "~~/app/shared/utils/logError";
 import { TaskEntity } from "../../domain/entity/TaskEntity";
 import {

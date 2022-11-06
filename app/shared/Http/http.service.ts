@@ -1,6 +1,6 @@
-import { HttpError } from "../Error/HttpError";
+import { HttpError } from "../Error/http.error";
 import { FetchResult, TAPIResponse } from "../types";
-import { IHttpService } from "./HttpService.types";
+import { IHttpService } from "./http.service.types";
 import { err, ok } from "neverthrow";
 
 export class HttpService implements IHttpService {
