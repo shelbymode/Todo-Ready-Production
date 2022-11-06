@@ -4,7 +4,7 @@
 
 #### I promise, if during live-code session interview you at least **_hint_** and **_demonstrate_** only the small fraction of current project you will be hired instantly!
 
-# Technical Stack
+# Technical Stackgit 
 
 > ### [based on Vitess Nuxt 3 template from Anthony Fu](https://github.com/antfu/vitesse-nuxt3) :smiling_face_with_three_hearts: :blue_heart: :dizzy:
 
@@ -52,3 +52,5 @@
 6. Refactoring
 
 7. Add tests
+
+8. tbd3

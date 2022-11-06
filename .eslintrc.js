@@ -15,7 +15,7 @@ module.exports = {
         "plugin:vue/vue3-recommended",
         "plugin:prettier/recommended",
     ],
-    plugins: ["@typescript-eslint"],
+    plugins: ["@typescript-eslint", "eslint-plugin-neverthrow"],
     rules: {
         "no-unused-vars": "off",
         "no-undef": "off",
