@@ -1,11 +1,11 @@
 import { z, ZodError, ZodType } from "zod";
 
 export interface ICoreEntity<
-    TMIDSchema extends ZodType<unknown, unknown, unknown>,
-    TMPIData extends z.infer<TMIDSchema>
+    TMIDSchema extends ZodType<TMIData, unknown, unknown>,
+    TMIData extends z.infer<ZodType<unknown, unknown, unknown>>
 > {
-    modelDataSchema: TMIDSchema;
     err?: ZodError<unknown>;
-    data?: TMPIData;
-    validate(data: TMPIData): z.SafeParseReturnType<unknown, unknown>;
+    data?: TMIData;
+    _modelDataSchema: TMIDSchema;
+    validateDTO(data: unknown): this;
 }

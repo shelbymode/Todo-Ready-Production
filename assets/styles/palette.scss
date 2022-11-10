@@ -1,7 +1,3 @@
-:root {
-    --opacity: 1;
-}
-
 html[opacity="fullOpacity"] {
     --opacity: 1;
 }
@@ -15,6 +11,7 @@ html[opacity="lowOpacity"] {
 }
 
 :root {
+    --opacity: 1;
     --black: 0, 0, 0, var(--opacity);
     --white: 255, 255, 255, var(--opacity);
 
@@ -281,6 +278,7 @@ html[opacity="lowOpacity"] {
     --rose-800: 159, 18, 57, var(--opacity);
     --rose-900: 136, 19, 55, var(--opacity);
 }
+
 // Override variables for light theme
 :root {
     --neutral: var(--neutral-500);

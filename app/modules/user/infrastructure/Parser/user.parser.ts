@@ -1,19 +1,9 @@
-import { CoreParser } from "~~/app/modules/core/infrastructure/Parser/core.parser";
-import { TUserParserInputData } from "../../domain/validation/userDataSchema.types";
-import {
-    TUserOutputDataSchema,
-    TUserParserOutputData,
-    userOutputDataSchema,
-} from "./user.parser.types";
+import { CoreParser } from "~~/app/modules/core/infrastructure/core.parser";
+import { TUserDTO } from "../../domain/user.dto.schema";
+import { TUserOutputDataSchema, TUserOutputData } from "./user.parser.schema";
 
-export class UserParser extends CoreParser<
-    TUserOutputDataSchema,
-    TUserParserInputData,
-    TUserParserOutputData
-> {
-    constructor(
-        modelOutputDataSchema: TUserOutputDataSchema = userOutputDataSchema
-    ) {
-        super(modelOutputDataSchema);
+export class UserParser extends CoreParser<TUserOutputDataSchema, TUserDTO, TUserOutputData> {
+    constructor(_modelOutputDataSchema: TUserOutputDataSchema) {
+        super(_modelOutputDataSchema);
     }
 }

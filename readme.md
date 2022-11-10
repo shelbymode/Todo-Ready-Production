@@ -4,7 +4,7 @@
 
 #### I promise, if during live-code session interview you at least **_hint_** and **_demonstrate_** only the small fraction of current project you will be hired instantly!
 
-# Technical Stackgit 
+# Technical Stackgit
 
 > ### [based on Vitess Nuxt 3 template from Anthony Fu](https://github.com/antfu/vitesse-nuxt3) :smiling_face_with_three_hearts: :blue_heart: :dizzy:
 

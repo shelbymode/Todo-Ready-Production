@@ -1,9 +1,40 @@
-html {
+html,
+body {
     font-size: 14px;
     font-family: "Inter", sans-serif;
+    // font-family: "Orbitron", sans-serif;
     font-weight: 100;
 }
 
 input:focus {
     outline: 2px solid rgba(var(--badgeMain));
+}
+
+@keyframes sneak-in {
+    from {
+        opacity: 0%;
+        transform: translateX(-50%) translateY(-110%);
+    }
+    to {
+        opacity: 100%;
+        transform: translateX(-50%) translateY(0%);
+    }
+}
+
+@keyframes sneak-out {
+    from {
+        opacity: 100%;
+        transform: translateX(-50%) translateY(0%);
+    }
+    to {
+        opacity: 0%;
+        transform: translateX(-50%) translateY(-110%);
+    }
+}
+
+.creep-in {
+    animation: 1s ease both sneak-in;
+}
+.creep-out {
+    animation: 1s ease both sneak-out;
 }

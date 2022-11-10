@@ -2,32 +2,22 @@ import { z, ZodError, ZodType } from "zod";
 import { ICoreEntity } from "./core.entity.types";
 
 export class CoreEntity<
-    TMIDSchema extends ZodType<unknown, unknown, unknown>,
-    TMPIData extends z.infer<TMIDSchema>
-> implements ICoreEntity<TMIDSchema, TMPIData>
+    TMIDSchema extends ZodType<TMIData, unknown, unknown>,
+    TMIData extends z.infer<ZodType<unknown, unknown, unknown>> = z.infer<TMIDSchema>
+> implements ICoreEntity<TMIDSchema, TMIData>
 {
-    data?: TMPIData;
+    data?: TMIData;
     err?: ZodError<unknown>;
-    modelDataSchema: TMIDSchema;
-    validate(data: TMPIData) {
-        return this.modelDataSchema.safeParse(data);
-    }
+    validateDTO(data: unknown) {
+        const validateResult = this._modelDataSchema.safeParse(data);
 
-    constructor({
-        data,
-        modelDataSchema,
-    }: {
-        data: TMPIData;
-        modelDataSchema?: TMIDSchema;
-    }) {
-        this.modelDataSchema = modelDataSchema;
-
-        const validateResult = this.validate(data);
         if (validateResult.success === true) {
-            this.data = data;
+            this.data = validateResult.data;
         } else {
             this.err = validateResult.error;
         }
         return this;
     }
+
+    constructor(readonly _modelDataSchema: TMIDSchema) {}
 }
