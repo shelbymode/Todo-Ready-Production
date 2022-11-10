@@ -1,40 +1,20 @@
-import { CoreService } from "~~/app/modules/core/infrastructure/Service/core.service";
+import { CoreService } from "~~/app/modules/core/infrastructure/core.service";
 import { EndResult } from "~~/app/shared/types";
 import { UserEntity } from "../../domain/user.entity";
 import { IUserRepository } from "../../domain/user.repository";
-import {
-    TUserInputDataSchema,
-    TUserParserInputData,
-} from "../../domain/validation/userDataSchema.types";
+import { TUserDTOSchema, TUserDTO, userDTOSchema } from "../../domain/user.dto.schema";
 
 import { UserAPI } from "../API/user.api";
 import { UserParser } from "../Parser/user.parser";
-import {
-    TUserOutputDataSchema,
-    TUserParserOutputData,
-} from "../Parser/user.parser.types";
+import { TUserOutputData, TUserOutputDataSchema, userOutputDataSchema } from "../Parser/user.parser.schema";
 
-export class UserService
-    extends CoreService<
-        TUserInputDataSchema,
-        TUserOutputDataSchema,
-        TUserParserInputData,
-        TUserParserOutputData
-    >
-    implements IUserRepository
-{
+export class UserService extends CoreService<TUserDTOSchema, TUserOutputDataSchema, TUserDTO, TUserOutputData> implements IUserRepository {
     constructor() {
-        super({
-            fetchAPI: new UserAPI(),
-            modelParser: new UserParser(),
-            ModelEntity: UserEntity,
-        });
+        super(new UserAPI(), new UserParser(userOutputDataSchema), new UserEntity(userDTOSchema));
     }
-    async getUserById(id: string): EndResult<TUserParserOutputData> {
+    async getUserById(id: string): EndResult<TUserOutputData> {
         // We can't know type (only expect!) from DB without run-time validation
-        const fetchedData = await this.httpService.run(() =>
-            this.fetchAPI.getOne(id)
-        );
+        const fetchedData = await this.httpService.run(() => this.fetchAPI.getOne(id));
 
         //* Validate and transform data
         if (fetchedData.isOk()) {

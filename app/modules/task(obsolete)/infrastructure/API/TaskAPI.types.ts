@@ -7,11 +7,5 @@ export interface ITaskAPI extends ICRUDFetchRepository<TTaskParserInputData> {
 
     create(task: TTaskParserInputData): TAPIResponse<TTaskParserInputData>;
     remove(id: string): TAPIResponse<TTaskParserInputData>;
-    edit({
-        id,
-        body,
-    }: {
-        id: string;
-        body: TTaskParserInputData;
-    }): TAPIResponse<TTaskParserInputData>;
+    edit({ id, body }: { id: string; body: TTaskParserInputData }): TAPIResponse<TTaskParserInputData>;
 }

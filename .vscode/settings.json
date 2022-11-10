@@ -1,11 +1,10 @@
 {
-    "prettier.enable": false,
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
     "files.associations": {
         "*.css": "postcss"
     },
-    "editor.formatOnSave": false,
-    "cSpell.words": ["ICRUD"]
+    "printWidth": 220,
+    "prettier.configPath": "../prettierrc.json"
 }
