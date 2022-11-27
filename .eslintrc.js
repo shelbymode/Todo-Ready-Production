@@ -19,7 +19,12 @@ module.exports = {
     rules: {
         "no-unused-vars": "off",
         "no-undef": "off",
-        "prettier/prettier": "error",
+        "prettier/prettier": [
+            "error",
+            {
+                endOfLine: "auto",
+            },
+        ],
         "vue/multi-word-component-names": "off",
         "no-empty-function": "off",
         "@typescript-eslint/no-empty-function": [

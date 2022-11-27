@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
 
     console.log("22222");
 
-    if (a === 3) return new HttpError({ statusCode: 402, message: "Some error" });
+    if (a === 3)
+        return new HttpError({ statusCode: 402, message: "Some error" });
     return {
         id: "111",
         name: "andrew",

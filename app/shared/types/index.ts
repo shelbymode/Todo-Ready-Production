@@ -5,13 +5,18 @@ import { HttpError } from "../Error/http.error";
 import { ParseError } from "../Error/parse.error";
 import { ValidationError } from "../Error/validation.error";
 export type CustomError = { data: { message: string; statusCode: number } };
-export type TAPIResponse<Data = any, Error = CustomError> = AsyncData<Data, Error>;
+export type TAPIResponse<Data = any, Error = CustomError> = AsyncData<
+    Data,
+    Error
+>;
 
 export type TParser<I, O> = (input: I) => SafeParseReturnType<I, O>;
 
 export type FetchResult<T> = Promise<Result<T, HttpError>>;
 export type TransformResult<O> = O | ValidationError | ParseError;
-export type EndResult<O> = Promise<O | HttpError | ValidationError | ParseError>;
+export type EndResult<O> = Promise<
+    O | HttpError | ValidationError | ParseError
+>;
 
 export interface ICRUDFetchRepository<TMIData = any> {
     getOne(id: string): TAPIResponse<TMIData>;
@@ -24,4 +29,19 @@ export interface ICRUDFetchRepository<TMIData = any> {
 export interface PoorError {
     message: "something went wrong";
     error: Error;
+}
+
+export enum ModeNotification {
+    ALERT = "ALERT",
+    WARNING = "WARNING",
+    INFO = "INFO",
+}
+
+export interface INotification {
+    id: string;
+    isDisplay: boolean;
+    text: string;
+    mode: ModeNotification;
+    // duration: number;
+    // autoHide: boolean;
 }

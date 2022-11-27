@@ -11,7 +11,8 @@ export class CoreParser<
 {
     constructor(readonly _modelOutputDataSchema: TMODSchema) {}
     toDomain(inputData: TMIData): Result<TMOData, ParseError> {
-        const transformedData = this._modelOutputDataSchema.safeParse(inputData);
+        const transformedData =
+            this._modelOutputDataSchema.safeParse(inputData);
 
         if (transformedData.success == false) {
             return err(new ParseError(transformedData.error.issues));

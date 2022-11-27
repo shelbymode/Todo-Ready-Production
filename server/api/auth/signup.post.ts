@@ -6,7 +6,8 @@ export default defineEventHandler(async (event) => {
 
     //* TODO: Add schemas validation
 
-    if (!body.email || !body.name || !body.password || !body.confirmPassword) return { error: "Incorrect input data type", data: null };
+    if (!body.email || !body.name || !body.password || !body.confirmPassword)
+        return { error: "Incorrect input data type", data: null };
 
     try {
         const data = await AuthService.signup({

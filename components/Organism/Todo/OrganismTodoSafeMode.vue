@@ -5,13 +5,28 @@
         <legend text-2xl>Safe Mode</legend>
 
         <div>
-            <input id="safe-mode-auto" class="cybr-radio" name="safe-mode-group" type="radio" checked />
-            <label class="cybr-label text-white" for="safe-mode-auto">Auto</label>
+            <input
+                id="safe-mode-auto"
+                class="cybr-radio"
+                name="safe-mode-group"
+                type="radio"
+                checked
+            />
+            <label class="cybr-label text-white" for="safe-mode-auto"
+                >Auto</label
+            >
         </div>
 
         <div>
-            <input id="safe-mode-manual" class="cybr-radio" name="safe-mode-group" type="radio" />
-            <label class="cybr-label text-white" for="safe-mode-manual">Manual</label>
+            <input
+                id="safe-mode-manual"
+                class="cybr-radio"
+                name="safe-mode-group"
+                type="radio"
+            />
+            <label class="cybr-label text-white" for="safe-mode-manual"
+                >Manual</label
+            >
         </div>
     </fieldset>
 </template>

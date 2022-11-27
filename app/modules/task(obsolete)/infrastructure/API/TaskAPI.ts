@@ -18,7 +18,9 @@ export class TaskAPI implements ITaskAPI {
             server: false,
         }) as Awaited<TAPIResponse<TTaskParserInputData[]>>;
     }
-    async create(task: TTaskParserInputData): TAPIResponse<TTaskParserInputData> {
+    async create(
+        task: TTaskParserInputData
+    ): TAPIResponse<TTaskParserInputData> {
         return useLazyFetch(`/tasks?createTask=true`, {
             method: "POST",
             baseURL: BASE_URL,
@@ -33,7 +35,13 @@ export class TaskAPI implements ITaskAPI {
             server: false,
         });
     }
-    async edit({ id, body }: { id: string; body: TTaskParserInputData }): TAPIResponse<TTaskParserInputData> {
+    async edit({
+        id,
+        body,
+    }: {
+        id: string;
+        body: TTaskParserInputData;
+    }): TAPIResponse<TTaskParserInputData> {
         return useLazyFetch(`/tasks/${id}`, {
             method: "PUT",
             baseURL: BASE_URL,

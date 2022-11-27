@@ -1,15 +1,26 @@
 import { CoreService } from "~~/app/modules/core/infrastructure/core.service";
 import { logError } from "~~/app/shared/utils/logError";
 import { TaskEntity } from "../../domain/entity/TaskEntity";
-import { TTaskInputDataSchema, TTaskParserInputData } from "../../domain/validation/taskDataSchema.types";
+import {
+    TTaskInputDataSchema,
+    TTaskParserInputData,
+} from "../../domain/validation/taskDataSchema.types";
 
 import { TaskAPI } from "../API/TaskAPI";
 import { TaskParser } from "../Parser/TaskParser";
-import { TTaskOutputDataSchema, TTaskParserOutputData } from "../Parser/TaskParser.types";
+import {
+    TTaskOutputDataSchema,
+    TTaskParserOutputData,
+} from "../Parser/TaskParser.types";
 import { ITaskServiceOperations } from "./TaskService.types";
 
 export class TaskService
-    extends CoreService<TTaskInputDataSchema, TTaskOutputDataSchema, TTaskParserInputData, TTaskParserOutputData>
+    extends CoreService<
+        TTaskInputDataSchema,
+        TTaskOutputDataSchema,
+        TTaskParserInputData,
+        TTaskParserOutputData
+    >
     implements ITaskServiceOperations
 {
     constructor() {

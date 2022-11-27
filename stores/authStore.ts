@@ -2,7 +2,10 @@ import { defineStore } from "pinia";
 import { Login } from "~~/app/modules/auth/application/Login.usecase";
 import { Signup } from "~~/app/modules/auth/application/Signup.usecase";
 import { logError } from "~~/app/shared/utils/logError";
-import { TUserOptionsLogin, TUserOptionsSignup } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import {
+    TUserOptionsLogin,
+    TUserOptionsSignup,
+} from "~~/src/Auth/infrastructure/Service/auth.service.types";
 
 const useStoreAuth = defineStore("auth", {
     state: () => ({

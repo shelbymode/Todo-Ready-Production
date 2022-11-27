@@ -1,5 +1,8 @@
 import { HttpService } from "~~/app/modules/core/infrastructure/http.service";
-import { TUserOptionsLogin, TUserOptionsSignup } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import {
+    TUserOptionsLogin,
+    TUserOptionsSignup,
+} from "~~/src/Auth/infrastructure/Service/auth.service.types";
 import { IAuthRepository } from "../../domain/auth.repository";
 import { AuthAPI } from "../API/auth.api";
 
@@ -11,14 +14,18 @@ export class AuthService implements IAuthRepository {
         this.fetchAPI = new AuthAPI();
     }
     async login(userOptions: TUserOptionsLogin) {
-        const fetchedData = await this.httpService.run(() => this.fetchAPI.login(userOptions));
+        const fetchedData = await this.httpService.run(() =>
+            this.fetchAPI.login(userOptions)
+        );
 
         if (fetchedData.isOk()) {
             return fetchedData.value;
         } else return fetchedData.error;
     }
     async signup(userOptions: TUserOptionsSignup) {
-        const fetchedData = await this.httpService.run(() => this.fetchAPI.signup(userOptions));
+        const fetchedData = await this.httpService.run(() =>
+            this.fetchAPI.signup(userOptions)
+        );
 
         if (fetchedData.isOk()) {
             return fetchedData.value;

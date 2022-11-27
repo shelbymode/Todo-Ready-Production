@@ -15,5 +15,10 @@ export interface IProcessService<
     readonly modelParser: CoreParser<TMODSchema, TMIData, TMOData>;
     validateDTO(fetchedData: unknown): Result<TMIData, ValidationError>;
     transformData(validatedDTO: TMIData): Result<TMOData, ParseError>;
-    processData(fetchedData: TMIData): Ok<TMOData, never> | Err<TMIData, ValidationError> | Err<TMOData, ParseError>;
+    processData(
+        fetchedData: TMIData
+    ):
+        | Ok<TMOData, never>
+        | Err<TMIData, ValidationError>
+        | Err<TMOData, ParseError>;
 }

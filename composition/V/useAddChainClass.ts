@@ -6,7 +6,10 @@
 
 import { Ref } from "vue";
 
-export function useChainAddClass<A extends { [key: number]: string }, TKeys extends A[number]>(el: Ref<HTMLElement>, listClasses: A) {
+export function useChainAddClass<
+    A extends { [key: number]: string },
+    TKeys extends A[number]
+>(el: Ref<HTMLElement>, listClasses: A) {
     const animationController = {} as Record<TKeys, () => void>;
 
     const runAnimation = (className: string) => () => {

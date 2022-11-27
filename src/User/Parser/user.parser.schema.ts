@@ -1,5 +1,8 @@
 import { z } from "zod";
-import { TEnumGender, TEnumRole } from "~~/app/modules/user/domain/user.dto.schema";
+import {
+    TEnumGender,
+    TEnumRole,
+} from "~~/app/modules/user/domain/user.dto.schema";
 import { toCapitalize } from "~~/app/shared/utils/toCapitalize";
 
 export const userDBDataSchema = z

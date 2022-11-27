@@ -5,7 +5,11 @@ import { TUserDBDataSchema } from "./user.parser.schema";
 
 // TODO: refacotor redundant generic
 
-export class UserParserDB extends CoreParser<TUserDBToTDOSchema, TUserDB, TUserDTO> {
+export class UserParserDB extends CoreParser<
+    TUserDBToTDOSchema,
+    TUserDB,
+    TUserDTO
+> {
     constructor(_modelOutputDataSchema: TUserDBDataSchema) {
         super(_modelOutputDataSchema);
     }

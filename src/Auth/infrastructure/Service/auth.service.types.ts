@@ -15,7 +15,11 @@ export type TUserOptionsSignup = {
 
 export interface IAuthService {
     userService: UserService;
-    login(userOptions: TUserOptionsLogin): Promise<{ token: string; tokenExpiryInDays: number }>;
-    signup(userOptions: TUserOptionsSignup): Promise<{ data: User; error: null }>;
+    login(
+        userOptions: TUserOptionsLogin
+    ): Promise<{ token: string; tokenExpiryInDays: number }>;
+    signup(
+        userOptions: TUserOptionsSignup
+    ): Promise<{ data: User; error: null }>;
     logout(): void;
 }

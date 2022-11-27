@@ -2,10 +2,16 @@ import { z, ZodType } from "zod";
 import { HttpError } from "~~/app/shared/Error/http.error";
 import { ParseError } from "~~/app/shared/Error/parse.error";
 import { ValidationError } from "~~/app/shared/Error/validation.error";
-import { IExecutor, IUseCaseCallbacks, IUseCaseCore } from "./core.usecase.types";
+import {
+    IExecutor,
+    IUseCaseCallbacks,
+    IUseCaseCore,
+} from "./core.usecase.types";
 
-export class UseCaseCore<TIArgs extends object, TMOData extends z.infer<ZodType<unknown, unknown, unknown>>>
-    implements IUseCaseCore<TIArgs, TMOData>
+export class UseCaseCore<
+    TIArgs extends object,
+    TMOData extends z.infer<ZodType<unknown, unknown, unknown>>
+> implements IUseCaseCore<TIArgs, TMOData>
 {
     constructor(readonly _executor: IExecutor<TIArgs, TMOData>) {}
     async execute(

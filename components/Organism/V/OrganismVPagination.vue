@@ -18,11 +18,15 @@ import { useOffsetPagination } from "@vueuse/core";
 
 <template>
     <div class="w-full flex items-center justify-between">
-        <AtomPaginationSwitchPage icon="i-carbon-chevron-left">Previous</AtomPaginationSwitchPage>
+        <AtomPaginationSwitchPage icon="i-carbon-chevron-left"
+            >Previous</AtomPaginationSwitchPage
+        >
         <AtomPaginationElement v-for="el in 5" :key="el">
             {{ el }}
         </AtomPaginationElement>
-        <AtomPaginationSwitchPage icon="i-carbon-chevron-right"></AtomPaginationSwitchPage>
+        <AtomPaginationSwitchPage
+            icon="i-carbon-chevron-right"
+        ></AtomPaginationSwitchPage>
     </div>
 </template>
 

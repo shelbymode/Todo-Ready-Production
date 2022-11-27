@@ -1,5 +1,11 @@
 :root {
-    --shape-normal: polygon(0 0, 100% 0, 100% calc(100% - 0.625rem), calc(100% - 0.625rem) 100%, 0 100%);
+    --shape-normal: polygon(
+        0 0,
+        100% 0,
+        100% calc(100% - 0.625rem),
+        calc(100% - 0.625rem) 100%,
+        0 100%
+    );
     --shape-thin: polygon(
         0 0,
         100% 0,
@@ -93,7 +99,12 @@
     border: 0;
     opacity: 0.7;
     height: 0.7rem;
-    background: linear-gradient(90deg, #fff 0, #fff 55%, rgba(255, 255, 255, 0.1));
+    background: linear-gradient(
+        90deg,
+        #fff 0,
+        #fff 55%,
+        rgba(255, 255, 255, 0.1)
+    );
 }
 
 .cybr-label {

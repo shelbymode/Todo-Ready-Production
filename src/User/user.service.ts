@@ -4,7 +4,11 @@ import { TUserOptionsSignup } from "../Auth/infrastructure/Service/auth.service.
 import { IUserService } from "./user.service.types";
 
 export class UserService implements IUserService {
-    constructor(private userModel: Prisma.UserDelegate<Prisma.RejectOnNotFound | Prisma.RejectPerOperation>) {}
+    constructor(
+        private userModel: Prisma.UserDelegate<
+            Prisma.RejectOnNotFound | Prisma.RejectPerOperation
+        >
+    ) {}
     async findByEmail(email: string) {
         return this.userModel.findUnique({
             where: {

@@ -6,9 +6,17 @@ import { useValidationAuthLogin } from "~~/composition/auth/useValidationAuthLog
 import { useValidationAuthSignup } from "~~/composition/auth/useValidationAuthSignup";
 
 const formLogin = reactive({ email: "", password: "" });
-const formSignup = reactive({ email: "", name: "", password: "", confirmPassword: "" });
+const formSignup = reactive({
+    email: "",
+    name: "",
+    password: "",
+    confirmPassword: "",
+});
 
-const { mapInputInfo, mapAuthForm, mapAuthButtons, mapAuthTabs } = useDataAuth({ formLogin, formSignup });
+const { mapInputInfo, mapAuthForm, mapAuthButtons, mapAuthTabs } = useDataAuth({
+    formLogin,
+    formSignup,
+});
 
 const {
     isFormValid: isLoginFormValid,
@@ -41,16 +49,18 @@ const mapAuthFormValidation = {
         isFormValid: isSignupFormValid,
     },
 };
-
-// const isFormValid = computed(() => )
 </script>
 
 <template>
-    <MoleculeVNotification />
     <NuxtLayout name="auth">
         <TemplateAuth>
             <template #tabs-control>
-                <Tab v-for="mapAuthTab in Object.values(mapAuthTabs)" :key="mapAuthTab" v-slot="{ selected }" as="template">
+                <Tab
+                    v-for="mapAuthTab in Object.values(mapAuthTabs)"
+                    :key="mapAuthTab"
+                    v-slot="{ selected }"
+                    as="template"
+                >
                     <AtomAuthTabButton :selected="selected">
                         {{ mapAuthTab }}
                     </AtomAuthTabButton>
@@ -58,29 +68,58 @@ const mapAuthFormValidation = {
             </template>
 
             <template #tabs-content>
-                <TabPanel v-for="(inputs, formCategory) in mapInputInfo" :key="formCategory" class="h-full focus:outline-none">
-                    <TemplateAuthForm :submit-auth-handler="mapAuthButtons[formCategory].handler">
+                <TabPanel
+                    v-for="(inputs, formCategory) in mapInputInfo"
+                    :key="formCategory"
+                    class="h-full focus:outline-none"
+                >
+                    <TemplateAuthForm
+                        :submit-auth-handler="
+                            mapAuthButtons[formCategory].handler
+                        "
+                    >
                         <template v-for="input in inputs" :key="input.id">
                             <TemplateAuthFormControl>
                                 <MoleculeVInput
                                     :id="input.id"
-                                    v-model="mapAuthForm[formCategory][input.id]"
-                                    :status-validation="mapAuthFormValidation[formCategory].getStatusValidation(input.id).value"
+                                    v-model="
+                                        mapAuthForm[formCategory][input.id]
+                                    "
+                                    :status-validation="
+                                        mapAuthFormValidation[
+                                            formCategory
+                                        ].getStatusValidation(input.id).value
+                                    "
                                     :label="input.label"
                                     class="w-4/5"
                                     :type="input?.type || 'text'"
-                                    @input="mapAuthFormValidation[formCategory].touch(input.id)"
+                                    @input="
+                                        mapAuthFormValidation[
+                                            formCategory
+                                        ].touch(input.id)
+                                    "
                                 />
 
                                 <AtomVValidationMessage
-                                    :is-error="mapAuthFormValidation[formCategory].isDirtyAndError(input.id)"
-                                    :error-message="mapAuthFormValidation[formCategory].getMessage(input.id)"
+                                    :is-error="
+                                        mapAuthFormValidation[
+                                            formCategory
+                                        ].isDirtyAndError(input.id)
+                                    "
+                                    :error-message="
+                                        mapAuthFormValidation[
+                                            formCategory
+                                        ].getMessage(input.id)
+                                    "
                                 />
                             </TemplateAuthFormControl>
                         </template>
                         <AtomVButton
                             type="submit"
-                            :disabled="!mapAuthFormValidation[formCategory].isFormValid.value"
+                            :disabled="
+                                !mapAuthFormValidation[formCategory].isFormValid
+                                    .value
+                            "
                             :name="mapAuthButtons[formCategory].name"
                         />
                     </TemplateAuthForm>

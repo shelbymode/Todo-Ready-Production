@@ -4,7 +4,9 @@ export default defineEventHandler(async (event) => {
     console.log("1. Server middleware");
 
     const potentialUserToken = getCookie(event, "todo-production-user");
-    const payloadToken = await AuthService.getUserFromVerificationToken(potentialUserToken);
+    const payloadToken = await AuthService.getUserFromVerificationToken(
+        potentialUserToken
+    );
 
     if (!payloadToken) {
         event.context.user = null;

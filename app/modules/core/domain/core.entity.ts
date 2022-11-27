@@ -3,7 +3,9 @@ import { ICoreEntity } from "./core.entity.types";
 
 export class CoreEntity<
     TMIDSchema extends ZodType<TMIData, unknown, unknown>,
-    TMIData extends z.infer<ZodType<unknown, unknown, unknown>> = z.infer<TMIDSchema>
+    TMIData extends z.infer<
+        ZodType<unknown, unknown, unknown>
+    > = z.infer<TMIDSchema>
 > implements ICoreEntity<TMIDSchema, TMIData>
 {
     data?: TMIData;

@@ -41,7 +41,13 @@ const statusBarData = reactiveCalcStatusBar(props.items);
         </template>
 
         <template #items>
-            <MoleculeTodoItem v-for="item in props.items" :id="item.id" :key="item.id" :is-done="item.isDone" :task="item.task" />
+            <MoleculeTodoItem
+                v-for="item in props.items"
+                :id="item.id"
+                :key="item.id"
+                :is-done="item.isDone"
+                :task="item.task"
+            />
         </template>
 
         <template #status-bar>

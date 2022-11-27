@@ -14,7 +14,11 @@ const props = withDefaults(
         placeholder?: string;
         label?: string;
         type?: "text" | "password";
-        statusValidation?: "inactive" | "initial-error" | "dirty-error" | "correct";
+        statusValidation?:
+            | "inactive"
+            | "initial-error"
+            | "dirty-error"
+            | "correct";
     }>(),
     {
         statusValidation: "inactive",
@@ -23,12 +27,22 @@ const props = withDefaults(
 );
 
 const [isFocus, toggleFocus] = useToggle(false);
-const { colorStatusValidation, inputIsNotEmpty } = useMoleculeVInput(props, isFocus);
+const { colorStatusValidation, inputIsNotEmpty } = useMoleculeVInput(
+    props,
+    isFocus
+);
 </script>
 
 <template>
-    <label v-if="label" :for="id" class="relative w-full text-2xl font-normal opacity-100"
-        ><span class="label duration-300 text-dark-700" :class="{ 'label-start': isFocus || inputIsNotEmpty }">{{ label }}</span>
+    <label
+        v-if="label"
+        :for="id"
+        class="relative w-full text-2xl font-normal opacity-100"
+        ><span
+            class="label duration-300 text-dark-700"
+            :class="{ 'label-start': isFocus || inputIsNotEmpty }"
+            >{{ label }}</span
+        >
         <input
             v-bind="$attrs"
             :id="id"

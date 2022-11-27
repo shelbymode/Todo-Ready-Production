@@ -1,8 +1,17 @@
 import { Auth } from "~~/app/shared/constants";
-import { TUserOptionsLogin, TUserOptionsSignup } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import {
+    TUserOptionsLogin,
+    TUserOptionsSignup,
+} from "~~/src/Auth/infrastructure/Service/auth.service.types";
 import { useStoreAuth } from "~~/stores/authStore";
 
-export const useDataAuth = ({ formLogin, formSignup }: { formLogin: TUserOptionsLogin; formSignup: TUserOptionsSignup }) => {
+export const useDataAuth = ({
+    formLogin,
+    formSignup,
+}: {
+    formLogin: TUserOptionsLogin;
+    formSignup: TUserOptionsSignup;
+}) => {
     const storeAuth = useStoreAuth();
 
     function loginHandler(e: Event) {

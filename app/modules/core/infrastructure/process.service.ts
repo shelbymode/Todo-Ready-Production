@@ -13,7 +13,10 @@ export class ProcessService<
     TMOData extends z.infer<ZodType<unknown, unknown, unknown>>
 > implements IProcessService<TMIDSchema, TMODSchema, TMIData, TMOData>
 {
-    constructor(readonly modelEntity: CoreEntity<TMIDSchema, TMIData>, readonly modelParser: CoreParser<TMODSchema, TMIData, TMOData>) {}
+    constructor(
+        readonly modelEntity: CoreEntity<TMIDSchema, TMIData>,
+        readonly modelParser: CoreParser<TMODSchema, TMIData, TMOData>
+    ) {}
     validateDTO(fetchedData: TMIData): Result<TMIData, ValidationError> {
         const validatedDTO = this.modelEntity.validateDTO(fetchedData);
 
@@ -25,7 +28,12 @@ export class ProcessService<
     transformData(validatedDTO: TMIData) {
         return this.modelParser.toDomain(validatedDTO);
     }
-    processData(fetchedData: TMIData): Ok<TMOData, never> | Err<TMIData, ValidationError> | Err<TMOData, ParseError> {
+    processData(
+        fetchedData: TMIData
+    ):
+        | Ok<TMOData, never>
+        | Err<TMIData, ValidationError>
+        | Err<TMOData, ParseError> {
         // Run-time validation from DB (according to input data schema)
         const validatedDTO = this.validateDTO(fetchedData);
         if (validatedDTO.isErr()) return validatedDTO;

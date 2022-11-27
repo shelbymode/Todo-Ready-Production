@@ -5,7 +5,10 @@ const props = defineProps<{
 </script>
 
 <template>
-    <form class="flex w-full flex-col h-full items-center justify-evenly" @submit.prevent="props.submitAuthHandler">
+    <form
+        class="flex w-full flex-col h-full items-center justify-evenly"
+        @submit.prevent="props.submitAuthHandler"
+    >
         <slot />
     </form>
 </template>
