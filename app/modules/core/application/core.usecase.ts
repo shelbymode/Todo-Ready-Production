@@ -1,23 +1,24 @@
+import { z, ZodType } from "zod";
 import { HttpError } from "~~/app/shared/Error/http.error";
 import { ParseError } from "~~/app/shared/Error/parse.error";
 import { ValidationError } from "~~/app/shared/Error/validation.error";
-import { IExecutor, IUseCaseCallbacks } from "./core.usecase.types";
+import { IExecutor, IUseCaseCallbacks, IUseCaseCore } from "./core.usecase.types";
 
-export class UseCaseCore<TInputArgs, TModelParserOutputData> {
-    constructor(
-        public executor: IExecutor<TInputArgs, TModelParserOutputData>
-    ) {}
+export class UseCaseCore<TIArgs extends object, TMOData extends z.infer<ZodType<unknown, unknown, unknown>>>
+    implements IUseCaseCore<TIArgs, TMOData>
+{
+    constructor(readonly _executor: IExecutor<TIArgs, TMOData>) {}
     async execute(
-        args: TInputArgs,
+        args: TIArgs,
         {
             respondWithSuccess,
             respondWithClientError,
             respondWithServerError,
             respondWithParseError,
             respondWithValidationError,
-        }: IUseCaseCallbacks<TModelParserOutputData>
+        }: IUseCaseCallbacks<TMOData>
     ) {
-        const result = await this.executor(args);
+        const result = await this._executor(args);
         if (result instanceof HttpError) {
             if (result.isClientError) {
                 respondWithClientError(result);

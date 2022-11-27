@@ -3,7 +3,10 @@
 import { transformerDirectives, transformerVariantGroup } from "unocss";
 
 export default defineNuxtConfig({
-    modules: ["@vueuse/nuxt", "@unocss/nuxt", "@pinia/nuxt"],
+    devServer: {
+        port: 3000,
+    },
+    modules: ["@nuxtjs/google-fonts", "@vueuse/nuxt", "@unocss/nuxt", "@pinia/nuxt"],
     unocss: {
         // presets
         preflight: true,
@@ -45,17 +48,17 @@ export default defineNuxtConfig({
             },
         },
     },
-    buildModules: ["@nuxtjs/google-fonts"],
-    colorMode: {
-        classSuffix: "",
-    },
-    css: ["@/assets/styles/palette.scss", "@/assets/styles/global.scss"],
+    // buildModules: ["@nuxtjs/google-fonts"],
+    css: ["@/assets/styles/palette.scss", "@/assets/styles/global.scss", "@/assets/styles/cyber.scss"],
     googleFonts: {
+        display: "swap",
         families: {
-            Inter: {
-                wght: [100, 400, 700, 900],
-            },
+            Orbitron: [100, 400],
+            Inter: [100, 300],
             Lato: [100, 300],
+            Raleway: {
+                wght: [100, 400],
+            },
         },
     },
 

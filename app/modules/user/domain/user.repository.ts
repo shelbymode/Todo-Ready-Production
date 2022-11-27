@@ -1,6 +1,6 @@
 import { EndResult } from "~~/app/shared/types";
-import { TUserParserOutputData } from "../infrastructure/Parser/user.parser.types";
+import { TUserOutputData } from "../infrastructure/Parser/user.parser.schema";
 
 export interface IUserRepository {
-    getUserById(id: string): EndResult<TUserParserOutputData>;
+    getUserById(id: string): EndResult<TUserOutputData>;
 }
