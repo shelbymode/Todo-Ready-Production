@@ -1,5 +1,5 @@
 /**
- * Generate functions for adding specific class to the DOM element
+ * @desc: Generate functions for adding specific class to the DOM element
  * @example: for creating simple animation (pop in - pop out)
  * @warning: receives list classes as const in order to infer string[]
  */
