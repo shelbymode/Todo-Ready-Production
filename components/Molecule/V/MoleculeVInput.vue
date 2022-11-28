@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useMoleculeVInput } from "~~/composition/V/useMoleculeVInput";
+import { useVMoleculeInput } from "~~/composition/V/useVMoleculeInput";
 
 const props = withDefaults(
     defineProps<{
@@ -27,7 +27,7 @@ const props = withDefaults(
 );
 
 const [isFocus, toggleFocus] = useToggle(false);
-const { colorStatusValidation, inputIsNotEmpty } = useMoleculeVInput(
+const { colorStatusValidation, inputIsNotEmpty } = useVMoleculeInput(
     props,
     isFocus
 );

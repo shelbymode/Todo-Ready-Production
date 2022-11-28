@@ -7,7 +7,7 @@ import {
     TUserOptionsSignup,
 } from "~~/src/Auth/infrastructure/Service/auth.service.types";
 
-const useStoreAuth = defineStore("auth", {
+const useAuthStore = defineStore("auth", {
     state: () => ({
         // users: [{ name: "Andrew" }, { name: "Vasya" }],
     }),
@@ -65,4 +65,4 @@ const useStoreAuth = defineStore("auth", {
     },
 });
 
-export { useStoreAuth };
+export { useAuthStore };

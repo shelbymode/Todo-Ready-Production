@@ -1,7 +1,7 @@
 import { Ref } from "vue";
 import { ColorInput } from "~~/app/shared/constants";
 
-export const useMoleculeVInput = (
+export const useVMoleculeInput = (
     props: {
         modelValue: string;
         statusValidation:

@@ -3,7 +3,7 @@ import {
     TUserOptionsLogin,
     TUserOptionsSignup,
 } from "~~/src/Auth/infrastructure/Service/auth.service.types";
-import { useStoreAuth } from "~~/stores/authStore";
+import { useAuthStore } from "~~/stores/authStore";
 
 export const useDataAuth = ({
     formLogin,
@@ -12,7 +12,7 @@ export const useDataAuth = ({
     formLogin: TUserOptionsLogin;
     formSignup: TUserOptionsSignup;
 }) => {
-    const storeAuth = useStoreAuth();
+    const storeAuth = useAuthStore();
 
     function loginHandler(e: Event) {
         console.log("login...");

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useStoreUser } from "~~/stores/userStore";
+import { useUserStore } from "~~/stores/userStore";
 
-const storeUser = useStoreUser();
+const storeUser = useUserStore();
 
 function getAllTodos() {
     storeUser.getOneUser("43cfef97-1289-4bc9-9b4c-f14932c7c827");

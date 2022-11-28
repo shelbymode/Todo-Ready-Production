@@ -4,9 +4,7 @@
     <div
         class="w-full fixed top-[0.5%] left-1/2 translate-x-[-50%] flex flex-col justify-center gap-y-5 items-center z-1"
     >
-        <TransitionGroup name="list" appear>
-            <slot />
-        </TransitionGroup>
+        <slot />
     </div>
 </template>
 
