@@ -6,6 +6,9 @@ import {
     TUserOptionsLogin,
     TUserOptionsSignup,
 } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import { useNotificationStore } from "./notificationStore";
+
+const notifiationStore = useNotificationStore();
 
 const useAuthStore = defineStore("auth", {
     state: () => ({
@@ -22,18 +25,30 @@ const useAuthStore = defineStore("auth", {
                 {
                     respondWithSuccess(data) {
                         console.log("Result: ", data);
+                        notifiationStore.displayNotification(
+                            "Success authorization",
+                            {
+                                autoHide: true,
+                            }
+                        );
                     },
                     respondWithClientError(clientError) {
                         logError(clientError, "Client error");
+                        notifiationStore.displayNotification(
+                            clientError.message,
+                            {
+                                autoHide: true,
+                            }
+                        );
                     },
                     respondWithServerError(serverError) {
                         logError(serverError, "Server error");
-                    },
-                    respondWithValidationError(validationError) {
-                        logError(validationError, "Validation error");
-                    },
-                    respondWithParseError(parseError) {
-                        logError(parseError, "Parse error");
+                        notifiationStore.displayNotification(
+                            serverError.message,
+                            {
+                                autoHide: true,
+                            }
+                        );
                     },
                 }
             );

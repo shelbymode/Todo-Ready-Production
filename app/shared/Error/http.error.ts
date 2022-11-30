@@ -1,7 +1,11 @@
 import { HttpStatusCode } from "../constants";
 
+/*
+ * To significant extent is compatible with FetchError object
+ */
 export class HttpError extends Error {
     statusCode: number;
+    statusText: string;
 
     constructor({
         statusCode,
@@ -13,8 +17,8 @@ export class HttpError extends Error {
         super(message);
 
         this.statusCode = statusCode;
-        this.name = HttpStatusCode[statusCode];
-        this.message = message || HttpStatusCode[statusCode];
+        this.statusText = HttpStatusCode[statusCode];
+        this.message = message || this.statusText;
     }
 
     get isClientError(): boolean {

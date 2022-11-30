@@ -2,7 +2,7 @@ import { v4 } from "uuid";
 import { INotification, ModeNotification } from "~~/app/shared/types";
 
 export const useVNotification = ({
-    autoHide = false,
+    autoHide = true,
     duration = 3000,
     mode = ModeNotification.INFO,
     storeNotification,

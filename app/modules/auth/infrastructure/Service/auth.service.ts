@@ -13,22 +13,10 @@ export class AuthService implements IAuthRepository {
         this.httpService = new HttpService();
         this.fetchAPI = new AuthAPI();
     }
-    async login(userOptions: TUserOptionsLogin) {
-        const fetchedData = await this.httpService.run(() =>
-            this.fetchAPI.login(userOptions)
-        );
-
-        if (fetchedData.isOk()) {
-            return fetchedData.value;
-        } else return fetchedData.error;
+    login(userOptions: TUserOptionsLogin) {
+        return this.httpService.run(() => this.fetchAPI.login(userOptions));
     }
-    async signup(userOptions: TUserOptionsSignup) {
-        const fetchedData = await this.httpService.run(() =>
-            this.fetchAPI.signup(userOptions)
-        );
-
-        if (fetchedData.isOk()) {
-            return fetchedData.value;
-        } else return fetchedData.error;
+    signup(userOptions: TUserOptionsSignup) {
+        return this.httpService.run(() => this.fetchAPI.signup(userOptions));
     }
 }

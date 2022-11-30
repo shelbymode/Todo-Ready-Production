@@ -3,5 +3,5 @@ import { TUserOptionsSignup } from "../Auth/infrastructure/Service/auth.service.
 
 export interface IUserService {
     create(userOptions: TUserOptionsSignup): Promise<User>;
-    findByEmail(email: string): Promise<User>;
+    findByEmail(email: string): Promise<User | null>;
 }

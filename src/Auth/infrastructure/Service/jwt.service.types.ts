@@ -1,4 +1,6 @@
+import { NuxtError } from "#app";
 import JWT from "jsonwebtoken";
+import { Result, ResultAsync } from "neverthrow";
 
 export type TToken = string;
 export type TVerifiedToken = string | JWT.JwtPayload;
@@ -19,7 +21,15 @@ export interface IAuthJWTService {
     }: {
         inputPassword: string;
         userHash: string;
-    }): Promise<boolean>;
-    createToken({ email, id }: { email: string; id: string }): TToken;
-    getUserFromVerificationToken(token: string): Promise<TUserTokenPayload>;
+    }): ResultAsync<boolean, NuxtError>;
+    createToken({
+        email,
+        id,
+    }: {
+        email: string;
+        id: string;
+    }): Result<TToken, NuxtError>;
+    getUserFromVerificationToken(
+        token: string
+    ): Result<TUserTokenPayload, NuxtError>;
 }

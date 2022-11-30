@@ -26,8 +26,7 @@ const useNotificationStore = defineStore("notification-bus", {
         ): TIDNotification {
             const { createNotification } = useVNotification({
                 storeNotification: this.$state.notifications,
-                autoHide: options.autoHide,
-                duration: options.duration,
+                ...options,
             });
 
             if (!options.autoHide) return createNotification(text) as string;

@@ -1,3 +1,4 @@
+import { ResultAsync } from "neverthrow";
 import { z, ZodType } from "zod";
 import { HttpError } from "~~/app/shared/Error/http.error";
 import { ParseError } from "~~/app/shared/Error/parse.error";
@@ -24,25 +25,29 @@ export class UseCaseCore<
             respondWithValidationError,
         }: IUseCaseCallbacks<TMOData>
     ) {
-        const result = await this._executor(args);
-        if (result instanceof HttpError) {
-            if (result.isClientError) {
-                respondWithClientError(result);
-                return;
-            } else if (result.isServerError) {
-                respondWithServerError(result);
-                return;
+        const response = await this._executor(args);
+        if (response.isErr()) {
+            const result = response.error;
+
+            console.log("USECASE", result);
+
+            if (result instanceof HttpError) {
+                if (result.isClientError) {
+                    respondWithClientError(result);
+                } else if (result.isServerError) {
+                    respondWithServerError(result);
+                }
+            } else if (result instanceof ValidationError) {
+                respondWithValidationError(result);
+            } else if (result instanceof ParseError) {
+                respondWithParseError(result);
+            } else {
+                console.error(
+                    "UNKNOWN URGENT ERROR! THERE IS NOT HANDLER FOR IT"
+                );
             }
-        } else if (result instanceof ValidationError) {
-            respondWithValidationError(result);
-            return;
-        } else if (result instanceof ParseError) {
-            respondWithParseError(result);
-            return;
-        } else if (result instanceof Error) {
-            console.error("UNKNOWN URGENT ERROR! THERE IS NOT HANDLER FOR IT");
-            return;
-        } else {
+        } else if (response.isOk()) {
+            const result = response.value;
             respondWithSuccess(result);
         }
     }

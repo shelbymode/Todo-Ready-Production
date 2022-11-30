@@ -1,5 +1,7 @@
-import { Prisma, User } from "@prisma/client";
+import { FetchResult } from "~~/app/shared/types";
+import { User } from "@prisma/client";
 import { UserService } from "~~/src/User/user.service";
+import { ITokenResponse } from "./jwt.service.types";
 
 export type TUserOptionsLogin = {
     email: string;
@@ -15,11 +17,9 @@ export type TUserOptionsSignup = {
 
 export interface IAuthService {
     userService: UserService;
-    login(
-        userOptions: TUserOptionsLogin
-    ): Promise<{ token: string; tokenExpiryInDays: number }>;
+    login(userOptions: TUserOptionsLogin): FetchResult<ITokenResponse>;
     signup(
         userOptions: TUserOptionsSignup
-    ): Promise<{ data: User; error: null }>;
+    ): FetchResult<{ data: User; error: null }>;
     logout(): void;
 }

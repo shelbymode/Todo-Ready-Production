@@ -3,9 +3,11 @@
 <template>
     <div class="container-outer min-h-screen fixed w-screen"></div>
     <main
-        class="container-auth gap-x-6 flex max-h-3/4 h-full w-2/3 fixed left-1/2 top-1/2 rounded-3xl"
+        class="container-auth gap-x-6 flex max-h-4/5 h-full w-2/3 fixed left-1/2 top-1/2 rounded-3xl"
     >
-        <div class="container-picture rounded-l-3xl basis-3/5"></div>
+        <div class="container-picture rounded-l-3xl basis-3/5">
+            <NuxtLink class="h-20 w-full border-2 block" to="/"></NuxtLink>
+        </div>
         <div class="container-form basis-2/5">
             <slot />
         </div>

@@ -2,20 +2,6 @@
 import { useNotificationStore } from "./stores/notificationStore";
 
 const notificationStore = useNotificationStore();
-
-onMounted(() => {
-    setTimeout(() => {
-        notificationStore.displayNotification("Hello 1", { autoHide: true });
-    }, 500);
-
-    setTimeout(() => {
-        notificationStore.displayNotification("Hello 2", { autoHide: true });
-    }, 1500);
-
-    setTimeout(() => {
-        notificationStore.displayNotification("Hello 3", { autoHide: true });
-    }, 2500);
-});
 </script>
 
 <template>

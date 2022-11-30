@@ -4,18 +4,16 @@ export default defineEventHandler(async (event) => {
     console.log("1. Server middleware");
 
     const potentialUserToken = getCookie(event, "todo-production-user");
-    const payloadToken = await AuthService.getUserFromVerificationToken(
-        potentialUserToken
-    );
+    const payloadToken =
+        AuthService.getUserFromVerificationToken(potentialUserToken);
 
-    if (!payloadToken) {
+    if (payloadToken.isErr()) {
         event.context.user = null;
         setCookie(event, "todo-production-user", null, {
             sameSite: "lax",
         });
-        return;
+    } else if (payloadToken.isOk()) {
+        console.log("Payload Token:", payloadToken.value);
+        event.context.user = payloadToken.value;
     }
-    console.log("Payload Token:", payloadToken);
-
-    event.context.user = payloadToken;
 });

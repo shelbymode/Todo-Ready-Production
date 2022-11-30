@@ -6,7 +6,7 @@ const props = defineProps<{
 </script>
 
 <template>
-    <p v-if="isError" class="text-xl font-bold text-red-900">
+    <p v-if="isError" class="font-bold text-red-900">
         {{ errorMessage }}
     </p>
 </template>

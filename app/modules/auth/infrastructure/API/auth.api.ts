@@ -1,7 +1,8 @@
+import { ITokenResponse } from "~~/backend/Auth/infrastructure/Service/jwt.service.types";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/src/Auth/infrastructure/Service/auth.service.types";
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
 import { TAPIResponse } from "~~/app/shared/types";
 import { BASE_URL } from "~~/app/shared/utils/constants";
 import { IAuthAPI } from "./auth.api.types";

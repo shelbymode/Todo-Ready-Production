@@ -5,7 +5,9 @@ import {
 } from "~~/src/Auth/infrastructure/Service/auth.service.types";
 import { AuthService } from "../infrastructure/Service/auth.service";
 
-export class Signup extends UseCaseCore<TUserOptionsSignup, any> {
+type TOutputSignupData = any;
+
+export class Signup extends UseCaseCore<TUserOptionsSignup, TOutputSignupData> {
     constructor() {
         super((userOptions: TUserOptionsSignup) => {
             const authService = new AuthService();

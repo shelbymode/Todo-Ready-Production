@@ -33,7 +33,9 @@ const statusBarData = reactiveCalcStatusBar(props.items);
 <template>
     <TemplateTodoList>
         <template #title>
-            <h1 class="text-6xl text-black font-bold">TODO LIST</h1>
+            <NuxtLink to="/auth">
+                <h1 class="text-6xl text-black font-bold">TODO LIST</h1>
+            </NuxtLink>
         </template>
 
         <template #search>
