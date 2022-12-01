@@ -9,7 +9,9 @@ import { TabGroup, TabList, TabPanels } from "@headlessui/vue";
                 <slot name="tabs-control"></slot>
             </TabList>
 
-            <TabPanels class="flex flex-col h-full justify-center rounded-3xl bg-light-100/50">
+            <TabPanels
+                class="flex flex-col h-full justify-center rounded-3xl bg-light-100/50"
+            >
                 <slot name="tabs-content"></slot>
             </TabPanels>
         </TabGroup>

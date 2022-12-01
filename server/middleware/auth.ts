@@ -1,19 +1,20 @@
-import { AuthService } from "~~/src/Auth/infrastructure/Service/auth.service";
+import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
+import { COOKIE_AUTH_NAME } from "~~/client/shared/constants";
 
 export default defineEventHandler(async (event) => {
     console.log("1. Server middleware");
 
-    const potentialUserToken = getCookie(event, "todo-production-user");
-    const payloadToken = await AuthService.getUserFromVerificationToken(potentialUserToken);
+    const potentialUserToken = getCookie(event, COOKIE_AUTH_NAME);
+    const payloadToken =
+        AuthServerService.getUserFromVerificationToken(potentialUserToken);
 
-    if (!payloadToken) {
+    if (payloadToken.isErr()) {
         event.context.user = null;
-        setCookie(event, "todo-production-user", null, {
+        setCookie(event, COOKIE_AUTH_NAME, null, {
             sameSite: "lax",
         });
-        return;
+    } else if (payloadToken.isOk()) {
+        console.log("Payload Token:", payloadToken.value);
+        event.context.user = payloadToken.value;
     }
-    console.log("Payload Token:", payloadToken);
-
-    event.context.user = payloadToken;
 });

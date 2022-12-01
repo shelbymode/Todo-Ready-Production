@@ -27,7 +27,11 @@ function showPresentation() {
     >
         <AtomVCheckbox :id="props.id" v-model:isChecked="isChecked">
             <template #content>
-                <p class="transition-800" :class="{ 'line-through': isChecked }" text="4xl">
+                <p
+                    class="transition-800"
+                    :class="{ 'line-through': isChecked }"
+                    text="4xl"
+                >
                     {{ props.task }}
                 </p>
             </template>

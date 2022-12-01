@@ -1,5 +1,5 @@
 import { useAuthRedirect } from "~~/helpers/useAuthRedirect";
-import { HttpError } from "~~/app/shared/Error/http.error";
+import { HttpError } from "~~/client/shared/Error/http.error";
 
 export default defineEventHandler(async (event) => {
     const a = 2;
@@ -10,7 +10,8 @@ export default defineEventHandler(async (event) => {
 
     console.log("22222");
 
-    if (a === 3) return new HttpError({ statusCode: 402, message: "Some error" });
+    if (a === 3)
+        return new HttpError({ statusCode: 403, message: "Some error" });
     return {
         id: "111",
         name: "andrew",

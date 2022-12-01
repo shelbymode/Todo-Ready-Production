@@ -5,7 +5,7 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { useMoleculeVInput } from "~~/composition/V/useMoleculeVInput";
+import { useVMoleculeInput } from "~~/composition/V/useVMoleculeInput";
 
 const props = withDefaults(
     defineProps<{
@@ -14,7 +14,11 @@ const props = withDefaults(
         placeholder?: string;
         label?: string;
         type?: "text" | "password";
-        statusValidation?: "inactive" | "initial-error" | "dirty-error" | "correct";
+        statusValidation?:
+            | "inactive"
+            | "initial-error"
+            | "dirty-error"
+            | "correct";
     }>(),
     {
         statusValidation: "inactive",
@@ -23,12 +27,22 @@ const props = withDefaults(
 );
 
 const [isFocus, toggleFocus] = useToggle(false);
-const { colorStatusValidation, inputIsNotEmpty } = useMoleculeVInput(props, isFocus);
+const { colorStatusValidation, inputIsNotEmpty } = useVMoleculeInput(
+    props,
+    isFocus
+);
 </script>
 
 <template>
-    <label v-if="label" :for="id" class="relative w-full text-2xl font-normal opacity-100"
-        ><span class="label duration-300 text-dark-700" :class="{ 'label-start': isFocus || inputIsNotEmpty }">{{ label }}</span>
+    <label
+        v-if="label"
+        :for="id"
+        class="relative w-full text-2xl font-normal opacity-100"
+        ><span
+            class="label text-dark-700"
+            :class="{ 'label-start': isFocus || inputIsNotEmpty }"
+            >{{ label }}</span
+        >
         <input
             v-bind="$attrs"
             :id="id"
@@ -49,15 +63,14 @@ input {
     border-bottom: 4px solid v-bind(colorStatusValidation);
 }
 .label {
+    transition: 0.3s ease all;
     position: absolute;
     left: 8%;
-    top: 50%;
-    transform: translateY(-50%);
+    transform: translateY(100%);
 }
 .label-start {
     position: absolute;
     left: 0%;
-    top: 0%;
     transform: translateY(-100%);
 }
 </style>

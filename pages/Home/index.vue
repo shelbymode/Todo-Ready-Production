@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useStoreUser } from "~~/stores/userStore";
+import { useUserStore } from "~~/stores/userStore";
 import { v4 } from "uuid";
 
-const userStore = useStoreUser();
+const userStore = useUserStore();
 
 const items = [
     {
@@ -22,7 +22,6 @@ function createUser() {
 }
 
 definePageMeta({
-    middleware: "authorize",
     alias: "/",
 });
 </script>

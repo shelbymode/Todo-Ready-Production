@@ -1,10 +1,17 @@
 import { defineStore } from "pinia";
-import { Login } from "~~/app/modules/auth/application/Login.usecase";
-import { Signup } from "~~/app/modules/auth/application/Signup.usecase";
-import { logError } from "~~/app/shared/utils/logError";
-import { TUserOptionsLogin, TUserOptionsSignup } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import { Login } from "~~/client/modules/auth/application/Login.usecase";
+import { Signup } from "~~/client/modules/auth/application/Signup.usecase";
+import { logError } from "~~/client/shared/utils/logError";
+import {
+    TUserOptionsLogin,
+    TUserOptionsSignup,
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+import { useNotificationStore } from "./notificationStore";
+import { Logout } from "~~/client/modules/auth/application/Logout.usecase";
 
-const useStoreAuth = defineStore("auth", {
+const notifiationStore = useNotificationStore();
+
+const useAuthStore = defineStore("auth", {
     state: () => ({
         // users: [{ name: "Andrew" }, { name: "Vasya" }],
     }),
@@ -19,18 +26,27 @@ const useStoreAuth = defineStore("auth", {
                 {
                     respondWithSuccess(data) {
                         console.log("Result: ", data);
+                        notifiationStore.displayNotification(data.message, {
+                            autoHide: true,
+                        });
                     },
                     respondWithClientError(clientError) {
                         logError(clientError, "Client error");
+                        notifiationStore.displayNotification(
+                            clientError.message,
+                            {
+                                autoHide: true,
+                            }
+                        );
                     },
                     respondWithServerError(serverError) {
                         logError(serverError, "Server error");
-                    },
-                    respondWithValidationError(validationError) {
-                        logError(validationError, "Validation error");
-                    },
-                    respondWithParseError(parseError) {
-                        logError(parseError, "Parse error");
+                        notifiationStore.displayNotification(
+                            serverError.message,
+                            {
+                                autoHide: true,
+                            }
+                        );
                     },
                 }
             );
@@ -43,6 +59,9 @@ const useStoreAuth = defineStore("auth", {
                 {
                     respondWithSuccess(data) {
                         console.log("Result: ", data);
+                        notifiationStore.displayNotification(data.message, {
+                            autoHide: true,
+                        });
                     },
                     respondWithClientError(clientError) {
                         logError(clientError, "Client error");
@@ -50,16 +69,27 @@ const useStoreAuth = defineStore("auth", {
                     respondWithServerError(serverError) {
                         logError(serverError, "Server error");
                     },
-                    respondWithValidationError(validationError) {
-                        logError(validationError, "Validation error");
-                    },
-                    respondWithParseError(parseError) {
-                        logError(parseError, "Parse error");
-                    },
                 }
             );
+        },
+        logout() {
+            const logout = new Logout();
+            logout.execute(undefined, {
+                respondWithSuccess(data) {
+                    console.log("Result: ", data);
+                    notifiationStore.displayNotification(data.message, {
+                        autoHide: true,
+                    });
+                },
+                respondWithClientError(clientError) {
+                    logError(clientError, "Client error");
+                },
+                respondWithServerError(serverError) {
+                    logError(serverError, "Server error");
+                },
+            });
         },
     },
 });
 
-export { useStoreAuth };
+export { useAuthStore };

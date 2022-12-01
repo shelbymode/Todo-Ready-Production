@@ -6,7 +6,12 @@ export default defineNuxtConfig({
     devServer: {
         port: 3000,
     },
-    modules: ["@nuxtjs/google-fonts", "@vueuse/nuxt", "@unocss/nuxt", "@pinia/nuxt"],
+    modules: [
+        "@nuxtjs/google-fonts",
+        "@vueuse/nuxt",
+        "@unocss/nuxt",
+        "@pinia/nuxt",
+    ],
     unocss: {
         // presets
         preflight: true,
@@ -49,7 +54,12 @@ export default defineNuxtConfig({
         },
     },
     // buildModules: ["@nuxtjs/google-fonts"],
-    css: ["@/assets/styles/palette.scss", "@/assets/styles/global.scss", "@/assets/styles/cyber.scss"],
+    css: [
+        "@/assets/styles/palette.scss",
+        "@/assets/styles/global.scss",
+        "@/assets/styles/cyber.scss",
+        "@/assets/styles/animation.scss",
+    ],
     googleFonts: {
         display: "swap",
         families: {

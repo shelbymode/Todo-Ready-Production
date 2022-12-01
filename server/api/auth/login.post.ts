@@ -1,25 +1,38 @@
-import { TUserOptionsLogin } from "~~/src/Auth/infrastructure/Service/auth.service.types";
-import { AuthService } from "~~/src/Auth/infrastructure/Service/auth.service";
+import { TUserOptionsLogin } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
+import {
+    FailResponse,
+    SuccessResponse,
+} from "~~/client/shared/types/response.types";
+
+const loginValidate = (body: TUserOptionsLogin) => {
+    if (!body.email || !body.password) {
+        throw createError({
+            statusCode: 400,
+            message: "Incorrect input data typeY",
+        });
+    }
+};
 
 export default defineEventHandler(async (event) => {
     const body = (await readBody(event)) as TUserOptionsLogin;
 
-    if (!body.email || !body.password) return { error: "Incorrect input data type", data: null };
+    loginValidate(body);
 
     try {
-        const userToken = await AuthService.login({ email: body.email, password: body.password });
+        const potentialUserToken = await AuthServerService.login({
+            email: body.email,
+            password: body.password,
+        });
 
-        console.log("User Token", userToken);
-
-        if (userToken) {
-            setCookie(event, "todo-production-user", userToken.token, {
-                expires: new Date(Date.now() + userToken.tokenExpiryInDays * 24 * 60 * 60 * 1000),
-            });
+        if (potentialUserToken.isOk()) {
+            AuthServerService.setLoginCookie(event, potentialUserToken.value);
+            return SuccessResponse("Success authorization");
+        } else if (potentialUserToken.isErr()) {
+            throw FailResponse(potentialUserToken.error);
         }
-
-        return { data: "success", error: null };
     } catch (e) {
-        console.log(e);
-        return { data: null, error: e.message };
+        console.log("[[Catched by guard]]", e);
+        return e;
     }
 });

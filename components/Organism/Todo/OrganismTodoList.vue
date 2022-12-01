@@ -33,7 +33,9 @@ const statusBarData = reactiveCalcStatusBar(props.items);
 <template>
     <TemplateTodoList>
         <template #title>
-            <h1 class="text-6xl text-black font-bold">TODO LIST</h1>
+            <NuxtLink to="/auth">
+                <h1 class="text-6xl text-black font-bold">TODO LIST</h1>
+            </NuxtLink>
         </template>
 
         <template #search>
@@ -41,7 +43,13 @@ const statusBarData = reactiveCalcStatusBar(props.items);
         </template>
 
         <template #items>
-            <MoleculeTodoItem v-for="item in props.items" :id="item.id" :key="item.id" :is-done="item.isDone" :task="item.task" />
+            <MoleculeTodoItem
+                v-for="item in props.items"
+                :id="item.id"
+                :key="item.id"
+                :is-done="item.isDone"
+                :task="item.task"
+            />
         </template>
 
         <template #status-bar>

@@ -2,7 +2,10 @@ import useValidate from "@vuelidate/core";
 import { useValidationHelpers } from "./useValidationHelpers";
 import { required, email, minLength, helpers } from "@vuelidate/validators";
 
-export const useValidationAuthLogin = (formLogin: { email: string; password: string }) => {
+export const useValidationAuthLogin = (formLogin: {
+    email: string;
+    password: string;
+}) => {
     const rulesLogin = computed(() => {
         return {
             email: {
@@ -11,7 +14,10 @@ export const useValidationAuthLogin = (formLogin: { email: string; password: str
             },
             password: {
                 required: helpers.withMessage("Enter password, Dog", required),
-                minLength: helpers.withMessage("At least 6 symbols", minLength(6)),
+                minLength: helpers.withMessage(
+                    "At least 6 symbols",
+                    minLength(6)
+                ),
             },
         };
     });

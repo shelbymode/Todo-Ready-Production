@@ -1,6 +1,17 @@
-<script setup></script>
+<script setup lang="ts">
+import { useNotificationStore } from "./stores/notificationStore";
+
+const notificationStore = useNotificationStore();
+</script>
 
 <template>
+    <Transition name="toggle-animation">
+        <OrganismNotification
+            v-if="notificationStore.isNotificationExists"
+            :notifications="notificationStore.activeNotifications"
+        />
+    </Transition>
+
     <NuxtLayout>
         <NuxtPage />
     </NuxtLayout>

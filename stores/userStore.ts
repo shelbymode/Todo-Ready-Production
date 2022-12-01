@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { GetOneUser } from "~~/app/modules/user/application/GetOneUser.usecase";
-import { logError } from "~~/app/shared/utils/logError";
+import { GetOneUser } from "~~/client/modules/user/application/GetOneUser.usecase";
+import { logError } from "~~/client/shared/utils/logError";
 
-const useStoreUser = defineStore("user", {
+const useUserStore = defineStore("user", {
     state: () => ({
         users: [{ name: "Andrew" }, { name: "Vasya" }],
     }),
@@ -36,4 +36,4 @@ const useStoreUser = defineStore("user", {
     },
 });
 
-export { useStoreUser };
+export { useUserStore };
