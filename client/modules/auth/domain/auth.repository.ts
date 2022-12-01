@@ -1,9 +1,16 @@
-import { FetchResult } from "~~/shared/types/index";
-import { EndResult } from "~~/client/shared/types";
-import { TUserOptionsLogin } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
-
-export type ILoginResponse = any;
+import {
+    TUserOptionsLogin,
+    TUserOptionsSignup,
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+import { FetchResultClient } from "~~/client/shared/types";
+import {
+    ILoginResponse,
+    ISignupResponse,
+    ILogoutResponse,
+} from "~~/client/shared/types/response.types";
 
 export interface IAuthRepository {
-    login(userOptions: TUserOptionsLogin): FetchResult<ILoginResponse>;
+    login(userOptions: TUserOptionsLogin): FetchResultClient<ILoginResponse>;
+    signup(userOptions: TUserOptionsSignup): FetchResultClient<ISignupResponse>;
+    logout(): FetchResultClient<ILogoutResponse>;
 }

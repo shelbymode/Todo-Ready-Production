@@ -22,7 +22,6 @@ function createUser() {
 }
 
 definePageMeta({
-    middleware: "authorize",
     alias: "/",
 });
 </script>
