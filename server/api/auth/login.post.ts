@@ -1,5 +1,5 @@
-import { TUserOptionsLogin } from "~~/src/Auth/infrastructure/Service/auth.service.types";
-import { AuthServerService } from "~~/src/Auth/infrastructure/Service/auth.service";
+import { TUserOptionsLogin } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
 import {
     FailResponse,
     SuccessResponse,

@@ -2,7 +2,7 @@ import { Auth } from "~~/client/shared/constants";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/src/Auth/infrastructure/Service/auth.service.types";
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
 import { useAuthStore } from "~~/stores/authStore";
 
 export const useDataAuth = ({

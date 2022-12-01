@@ -31,6 +31,8 @@ export interface ISignupResponse {
 
 export type ILoginResponse = DatelessResponse;
 
+export type ILogoutResponse = DatelessResponse;
+
 /* 
   ╔═════════════════════════════════════════════════════════════════════════╗
   ║ Helper functions for response types                                      ║

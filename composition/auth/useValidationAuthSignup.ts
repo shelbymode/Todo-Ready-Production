@@ -7,7 +7,7 @@ import {
     helpers,
     sameAs,
 } from "@vuelidate/validators";
-import { TUserOptionsSignup } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import { TUserOptionsSignup } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
 
 export const useValidationAuthSignup = (formSignup: TUserOptionsSignup) => {
     const rulesSignup = computed(() => {

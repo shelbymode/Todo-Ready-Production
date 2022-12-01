@@ -1,3 +1,4 @@
+import { COOKIE_AUTH_NAME } from "./../../../../client/shared/constants";
 import { ITokenResponse } from "~~/backend/Auth/infrastructure/Service/jwt.service.types";
 import { FetchResultServer } from "~~/client/shared/types/index";
 import { connector } from "../../../../database/connection";
@@ -75,7 +76,7 @@ class _AuthServerService extends AuthJWTService implements IAuthService {
             });
     }
     setLoginCookie(event: H3Event, potentialUserToken: ITokenResponse) {
-        setCookie(event, "todo-production-user", potentialUserToken.token, {
+        setCookie(event, COOKIE_AUTH_NAME, potentialUserToken.token, {
             expires: new Date(
                 Date.now() +
                     potentialUserToken.tokenExpiryInDays * 24 * 60 * 60 * 1000
@@ -129,8 +130,8 @@ class _AuthServerService extends AuthJWTService implements IAuthService {
             );
         });
     }
-    clearLoginCookie() {
-        throw new Error();
+    clearLoginCookie(event: H3Event) {
+        deleteCookie(event, COOKIE_AUTH_NAME);
     }
 }
 const AuthServerService = new _AuthServerService(

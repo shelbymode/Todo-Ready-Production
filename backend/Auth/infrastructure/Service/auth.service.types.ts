@@ -21,5 +21,4 @@ export interface IAuthService {
     login(userOptions: TUserOptionsLogin): FetchResultServer<ITokenResponse>;
     signup(userOptions: TUserOptionsSignup): FetchResultServer<User>;
     setLoginCookie(event: H3Event, potentialUserToken: ITokenResponse): void;
-    clearLoginCookie(event: H3Event): void;
 }

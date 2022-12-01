@@ -391,3 +391,5 @@ export enum ColorInput {
 }
 
 export const TOKEN_EXPIRY_DAYS = 2;
+
+export const COOKIE_AUTH_NAME = "todo-production-user";

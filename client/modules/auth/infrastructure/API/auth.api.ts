@@ -1,8 +1,11 @@
-import { ILoginResponse } from "./../../../../shared/types/response.types";
+import {
+    ILoginResponse,
+    ILogoutResponse,
+} from "./../../../../shared/types/response.types";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/src/Auth/infrastructure/Service/auth.service.types";
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
 import { BASE_URL } from "~~/client/shared/utils/constants";
 import { IAuthAPI } from "./auth.api.types";
 import {
@@ -26,5 +29,12 @@ export class AuthAPI implements IAuthAPI {
             server: false,
             body: userOptions,
         }) as TAPIResponse<ISignupResponse>;
+    }
+    logout() {
+        return useLazyFetch(`/api/auth/logout`, {
+            method: "POST",
+            baseURL: BASE_URL,
+            server: false,
+        }) as TAPIResponse<ILogoutResponse>;
     }
 }

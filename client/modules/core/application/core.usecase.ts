@@ -5,7 +5,7 @@ import {
     IUseCaseCore,
 } from "./core.usecase.types";
 
-export class UseCaseCore<TIArgs extends object, TMOData>
+export class UseCaseCore<TIArgs, TMOData>
     implements IUseCaseCore<TIArgs, TMOData>
 {
     constructor(readonly _executor: IExecutor<TIArgs, TMOData>) {}

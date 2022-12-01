@@ -5,8 +5,9 @@ import { logError } from "~~/client/shared/utils/logError";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/src/Auth/infrastructure/Service/auth.service.types";
+} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
 import { useNotificationStore } from "./notificationStore";
+import { Logout } from "~~/client/modules/auth/application/Logout.usecase";
 
 const notifiationStore = useNotificationStore();
 
@@ -70,6 +71,23 @@ const useAuthStore = defineStore("auth", {
                     },
                 }
             );
+        },
+        logout() {
+            const logout = new Logout();
+            logout.execute(undefined, {
+                respondWithSuccess(data) {
+                    console.log("Result: ", data);
+                    notifiationStore.displayNotification(data.message, {
+                        autoHide: true,
+                    });
+                },
+                respondWithClientError(clientError) {
+                    logError(clientError, "Client error");
+                },
+                respondWithServerError(serverError) {
+                    logError(serverError, "Server error");
+                },
+            });
         },
     },
 });
