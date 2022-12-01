@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
-import { Login } from "~~/app/modules/auth/application/Login.usecase";
-import { Signup } from "~~/app/modules/auth/application/Signup.usecase";
-import { logError } from "~~/app/shared/utils/logError";
+import { Login } from "~~/client/modules/auth/application/Login.usecase";
+import { Signup } from "~~/client/modules/auth/application/Signup.usecase";
+import { logError } from "~~/client/shared/utils/logError";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
@@ -25,12 +25,9 @@ const useAuthStore = defineStore("auth", {
                 {
                     respondWithSuccess(data) {
                         console.log("Result: ", data);
-                        notifiationStore.displayNotification(
-                            "Success authorization",
-                            {
-                                autoHide: true,
-                            }
-                        );
+                        notifiationStore.displayNotification(data.message, {
+                            autoHide: true,
+                        });
                     },
                     respondWithClientError(clientError) {
                         logError(clientError, "Client error");
@@ -61,18 +58,15 @@ const useAuthStore = defineStore("auth", {
                 {
                     respondWithSuccess(data) {
                         console.log("Result: ", data);
+                        notifiationStore.displayNotification(data.message, {
+                            autoHide: true,
+                        });
                     },
                     respondWithClientError(clientError) {
                         logError(clientError, "Client error");
                     },
                     respondWithServerError(serverError) {
                         logError(serverError, "Server error");
-                    },
-                    respondWithValidationError(validationError) {
-                        logError(validationError, "Validation error");
-                    },
-                    respondWithParseError(parseError) {
-                        logError(parseError, "Parse error");
                     },
                 }
             );

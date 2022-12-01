@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Tab, TabPanel } from "@headlessui/vue";
-import { Auth } from "~~/app/shared/constants";
+import { Auth } from "~~/client/shared/constants";
 import { useDataAuth } from "~~/composition/auth/useDataAuth";
 import { useValidationAuthLogin } from "~~/composition/auth/useValidationAuthLogin";
 import { useValidationAuthSignup } from "~~/composition/auth/useValidationAuthSignup";

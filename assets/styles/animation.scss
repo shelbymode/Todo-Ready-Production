@@ -1,24 +1,24 @@
 .list-animation-move,
 .list-animation-enter-active,
 .list-animation-leave-active {
-  transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
 .list-animation-enter-from,
 .list-animation-leave-to {
-  opacity: 0;
-  transform: translateY(-75%);
+    opacity: 0;
+    transform: translateY(-75%);
 }
 
 .list-animation-leave-active {
-  position: absolute;
+    position: absolute;
 }
 
 .toggle-animation-enter-active,
 .toggle-animation-leave-active {
-  transition: all 0.4s ease;
+    transition: all 0.4s ease;
 }
 
 .toggle-animation-enter-from,
 .toggle-animation-leave-to {
-  opacity: 0;
+    opacity: 0;
 }

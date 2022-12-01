@@ -1,5 +1,5 @@
 import { useAuthRedirect } from "~~/helpers/useAuthRedirect";
-import { HttpError } from "~~/app/shared/Error/http.error";
+import { HttpError } from "~~/client/shared/Error/http.error";
 
 export default defineEventHandler(async (event) => {
     const a = 2;

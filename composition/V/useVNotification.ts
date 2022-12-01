@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import { INotification, ModeNotification } from "~~/app/shared/types";
+import { INotification, ModeNotification } from "~~/client/shared/types";
 
 export const useVNotification = ({
     autoHide = true,

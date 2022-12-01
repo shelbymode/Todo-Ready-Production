@@ -1,4 +1,4 @@
-import { Auth } from "~~/app/shared/constants";
+import { Auth } from "~~/client/shared/constants";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,

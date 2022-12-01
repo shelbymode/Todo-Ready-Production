@@ -1,4 +1,4 @@
-import { INotification } from "../app/shared/types/index";
+import { INotification } from "../client/shared/types/index";
 import { defineStore } from "pinia";
 import { useVNotification } from "~~/composition/V/useVNotification";
 

@@ -1,5 +1,5 @@
 import { Ref } from "vue";
-import { ColorInput } from "~~/app/shared/constants";
+import { ColorInput } from "~~/client/shared/constants";
 
 export const useVMoleculeInput = (
     props: {

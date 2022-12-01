@@ -1,11 +1,11 @@
-import { AuthService } from "~~/src/Auth/infrastructure/Service/auth.service";
+import { AuthServerService } from "~~/src/Auth/infrastructure/Service/auth.service";
 
 export default defineEventHandler(async (event) => {
     console.log("1. Server middleware");
 
     const potentialUserToken = getCookie(event, "todo-production-user");
     const payloadToken =
-        AuthService.getUserFromVerificationToken(potentialUserToken);
+        AuthServerService.getUserFromVerificationToken(potentialUserToken);
 
     if (payloadToken.isErr()) {
         event.context.user = null;

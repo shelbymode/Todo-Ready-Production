@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { INotification } from "~~/app/shared/types";
+import { INotification } from "~~/client/shared/types";
 
 const props = defineProps<{
     notifications: INotification[];

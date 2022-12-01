@@ -1,14 +1,13 @@
+import { TUserOptionsLogin } from "~~/src/Auth/infrastructure/Service/auth.service.types";
+import { AuthServerService } from "~~/src/Auth/infrastructure/Service/auth.service";
 import {
     FailResponse,
     SuccessResponse,
-} from "./../../../app/shared/types/index";
-import { TUserOptionsLogin } from "~~/src/Auth/infrastructure/Service/auth.service.types";
-import { AuthService } from "~~/src/Auth/infrastructure/Service/auth.service";
-import { CustomError } from "~~/app/shared/Error/CustomError";
+} from "~~/client/shared/types/response.types";
 
 const loginValidate = (body: TUserOptionsLogin) => {
     if (!body.email || !body.password) {
-        return new CustomError({
+        throw createError({
             statusCode: 400,
             message: "Incorrect input data typeY",
         });
@@ -21,13 +20,13 @@ export default defineEventHandler(async (event) => {
     loginValidate(body);
 
     try {
-        const potentialUserToken = await AuthService.login({
+        const potentialUserToken = await AuthServerService.login({
             email: body.email,
             password: body.password,
         });
 
         if (potentialUserToken.isOk()) {
-            AuthService.setLoginCookie(event, potentialUserToken.value);
+            AuthServerService.setLoginCookie(event, potentialUserToken.value);
             return SuccessResponse("Success authorization");
         } else if (potentialUserToken.isErr()) {
             throw FailResponse(potentialUserToken.error);
