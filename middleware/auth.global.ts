@@ -1,14 +1,16 @@
 import { COOKIE_AUTH_NAME } from "~~/client/shared/constants";
 
+const ALLOWED_ROUTES = [/^\/auth\/?$/];
+
 export default defineNuxtRouteMiddleware(async (to) => {
-    console.log("2. Route middleware");
+    if (ALLOWED_ROUTES.some((route) => route.test(to.fullPath))) {
+        return;
+    }
 
     const authToken = useCookie(COOKIE_AUTH_NAME);
 
     if (!authToken || !authToken.value) {
-        console.log("Token has corrupted");
+        console.log("Token is corrupted");
         return navigateTo("/auth");
-    } else {
-        console.log("Correct token exists");
     }
 });

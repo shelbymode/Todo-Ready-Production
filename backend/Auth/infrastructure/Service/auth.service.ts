@@ -79,7 +79,7 @@ class _AuthServerService extends AuthJWTService implements IAuthService {
         setCookie(event, COOKIE_AUTH_NAME, potentialUserToken.token, {
             expires: new Date(
                 Date.now() +
-                    potentialUserToken.tokenExpiryInDays * 24 * 60 * 60 * 1000
+                    potentialUserToken.tokenExpiryInDays * 1 * 60 * 1000
             ),
         });
     }
