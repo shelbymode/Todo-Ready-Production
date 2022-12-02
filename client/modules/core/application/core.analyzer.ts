@@ -1,23 +1,14 @@
 import { HttpError } from "~~/client/shared/Error/http.error";
-import {
-    IExecutor,
-    IUseCaseCallbacks,
-    IUseCaseCore,
-} from "./core.usecase.types";
+import { IAnalyser, IExecutor, IUseCaseCallbacks } from "./core.analyzer.types";
 
-export class UseCaseCore<TIArgs, TMOData>
-    implements IUseCaseCore<TIArgs, TMOData>
-{
-    constructor(readonly _executor: IExecutor<TIArgs, TMOData>) {}
-    async execute(
-        args: TIArgs,
-        {
-            respondWithSuccess,
-            respondWithClientError,
-            respondWithServerError,
-        }: IUseCaseCallbacks<TMOData>
-    ) {
-        const response = await this._executor(args);
+class Analyser<T> implements IAnalyser<T> {
+    constructor(public callback: IExecutor<T>) {}
+    async check({
+        respondWithSuccess,
+        respondWithClientError,
+        respondWithServerError,
+    }: IUseCaseCallbacks<T>) {
+        const response = await this.callback();
         if (response.isErr()) {
             const result = response.error;
 
@@ -38,3 +29,5 @@ export class UseCaseCore<TIArgs, TMOData>
         }
     }
 }
+
+export { Analyser };

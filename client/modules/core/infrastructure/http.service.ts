@@ -11,10 +11,7 @@ export class HttpService implements IHttpService {
             (response) => {
                 console.log("Response:", response);
 
-                const { data: fetchedData, error } = response;
-
-                console.log("data", fetchedData.value);
-                console.log("error", error.value);
+                const { data, error } = response;
 
                 if (error.value) {
                     return err(
@@ -24,7 +21,7 @@ export class HttpService implements IHttpService {
                         })
                     );
                 } else {
-                    return ok(fetchedData.value);
+                    return ok(data.value);
                 }
             }
         );

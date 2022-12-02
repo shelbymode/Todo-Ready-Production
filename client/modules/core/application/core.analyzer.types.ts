@@ -15,19 +15,16 @@ export interface IUseCaseGetOne<O> {
     getResult(id: string): EndResult<O>;
 }
 
-export type IExecutor<A, O> = (args: A) => EndResult<O>;
+export type IExecutor<O> = () => EndResult<O>;
 export type IUseCaseCallbacks<D> = Partial<_IUseCaseCallbacks<D>>;
 
-export interface IUseCaseCore<TIArgs, TMOData> {
-    readonly _executor: IExecutor<TIArgs, TMOData>;
-    execute(
-        args: TIArgs,
-        {
-            respondWithSuccess,
-            respondWithClientError,
-            respondWithServerError,
-            respondWithParseError,
-            respondWithValidationError,
-        }: IUseCaseCallbacks<TMOData>
-    );
+export interface IAnalyser<TMOData> {
+    readonly callback: IExecutor<TMOData>;
+    check({
+        respondWithSuccess,
+        respondWithClientError,
+        respondWithServerError,
+        respondWithParseError,
+        respondWithValidationError,
+    }: IUseCaseCallbacks<TMOData>);
 }

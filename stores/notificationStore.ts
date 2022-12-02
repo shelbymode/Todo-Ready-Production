@@ -22,8 +22,9 @@ const useNotificationStore = defineStore("notification-bus", {
     actions: {
         displayNotification(
             text: string,
-            options: TConfigNotification
+            options?: TConfigNotification
         ): TIDNotification {
+            options = options || {};
             const { createNotification } = useVNotification({
                 storeNotification: this.$state.notifications,
                 ...options,

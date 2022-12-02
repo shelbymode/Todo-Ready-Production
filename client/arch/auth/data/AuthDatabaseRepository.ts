@@ -3,10 +3,10 @@ import {
     TUserOptionsLogin,
     TUserOptionsSignup,
 } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
-import { IAuthRepository } from "../../domain/auth.repository";
-import { AuthAPI } from "../API/auth.api";
+import { IAuthRepository } from "../domain/IAuthRepository.types";
+import { AuthAPI } from "../infrastructure/API/auth.api";
 
-export class AuthClientService implements IAuthRepository {
+export class AuthDatabaseRepository implements IAuthRepository {
     httpService: HttpService;
     fetchAPI: AuthAPI;
     constructor() {

@@ -15,7 +15,7 @@ export interface DatelessResponse {
 
 export type TAPIResponse<Data, Error = NuxtError> = AsyncData<
     Data | null,
-    { data: Error | null }
+    { data: Error } | null
 >;
 
 /* 
