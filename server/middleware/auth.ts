@@ -1,5 +1,5 @@
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
-import { COOKIE_AUTH_NAME } from "~~/client/shared/constants";
+import { AuthServerService } from "~~/backend/Auth/services/auth.service";
+import { COOKIE_AUTH_NAME } from "~~/shared/constants";
 
 export default defineEventHandler(async (event) => {
     const potentialUserToken = getCookie(event, COOKIE_AUTH_NAME);

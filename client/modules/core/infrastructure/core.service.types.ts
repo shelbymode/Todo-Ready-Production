@@ -1,5 +1,5 @@
 import { ZodType, z } from "zod";
-import { ICRUDFetchRepository } from "~~/client/shared/types";
+import { ICRUDFetchRepository } from "~~/client/core/common/types";
 import { HttpService } from "./http.service";
 import { ProcessService } from "./process.service";
 

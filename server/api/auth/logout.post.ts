@@ -1,5 +1,5 @@
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
-import { SuccessResponse } from "~~/client/shared/types/response.types";
+import { AuthServerService } from "~~/backend/Auth/services/auth.service";
+import { SuccessResponse } from "~~/client/core/common/types/response.types";
 
 export default defineEventHandler(async (event) => {
     try {

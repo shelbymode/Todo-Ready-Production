@@ -1,9 +1,9 @@
-import { TUserOptionsLogin } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
+import { AuthServerService } from "~~/backend/Auth/services/auth.service";
+import { TUserOptionsLogin } from "~~/backend/Auth/services/auth.service.types";
 import {
-    FailResponse,
     SuccessResponse,
-} from "~~/client/shared/types/response.types";
+    FailResponse,
+} from "~~/client/core/common/types/response.types";
 
 const loginValidate = (body: TUserOptionsLogin) => {
     if (!body.email || !body.password) {

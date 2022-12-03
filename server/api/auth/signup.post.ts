@@ -1,9 +1,9 @@
+import { AuthServerService } from "~~/backend/Auth/services/auth.service";
+import { TUserOptionsSignup } from "~~/backend/Auth/services/auth.service.types";
 import {
     SuccessResponse,
     FailResponse,
-} from "~~/client/shared/types/response.types";
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
-import { TUserOptionsSignup } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+} from "~~/client/core/common/types/response.types";
 
 const signupValidate = (body: TUserOptionsSignup) => {
     if (!body.email || !body.name || !body.password || !body.confirmPassword) {

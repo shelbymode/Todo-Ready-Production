@@ -1,9 +1,9 @@
-import { AuthPloc } from "./../../client/arch/auth/presentation/AuthPloc";
-import { Auth } from "~~/client/shared/constants";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+} from "~~/backend/Auth/services/auth.service.types";
+import { AuthPloc } from "~~/client/core/auth/presentation/AuthPloc";
+import { Auth } from "~~/shared/constants";
 
 export const useDataAuth = ({
     formLogin,

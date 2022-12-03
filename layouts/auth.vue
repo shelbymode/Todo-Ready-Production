@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { AuthPloc } from "~~/client/arch/auth/presentation/AuthPloc";
+import { AuthPloc } from "~~/client/core/auth/presentation/AuthPloc";
 import { useVPlocState } from "~~/composition/V/useVPlocState";
 
 const authPloc = inject<AuthPloc>("authPloc") as AuthPloc;

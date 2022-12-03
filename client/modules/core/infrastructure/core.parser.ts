@@ -1,6 +1,6 @@
 import { err, ok, Result } from "neverthrow";
 import { z, ZodType } from "zod";
-import { ParseError } from "~~/client/shared/Error/parse.error";
+import { ParseError } from "~~/client/core/common/Error/parse.error";
 import { ICoreParser } from "./core.parser.types";
 
 export class CoreParser<

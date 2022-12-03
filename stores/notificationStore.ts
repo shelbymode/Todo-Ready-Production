@@ -1,5 +1,5 @@
-import { INotification } from "../client/shared/types/index";
 import { defineStore } from "pinia";
+import { INotification } from "~~/client/core/common/types";
 import { useVNotification } from "~~/composition/V/useVNotification";
 
 export type TIDNotification = string;

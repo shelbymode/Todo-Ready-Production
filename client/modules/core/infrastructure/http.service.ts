@@ -1,8 +1,8 @@
 import { err, ok, ResultAsync } from "neverthrow";
+import { HttpError } from "~~/client/core/common/Error/http.error";
+import { FetchResultClient } from "~~/client/core/common/types";
+import { TAPIResponse } from "~~/client/core/common/types/response.types";
 
-import { HttpError } from "~~/client/shared/Error/http.error";
-import { FetchResultClient } from "~~/client/shared/types";
-import { TAPIResponse } from "~~/client/shared/types/response.types";
 import { IHttpService } from "./http.service.types";
 
 export class HttpService implements IHttpService {
