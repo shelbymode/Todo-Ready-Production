@@ -1,5 +1,6 @@
 import { AsyncData, NuxtError } from "#app";
 import { User } from "@prisma/client";
+import { TUserDTO } from "~~/shared/types/dto.types";
 import { UserEntity } from "../../user/domain/user.entity";
 
 /* 
@@ -29,11 +30,9 @@ export type TAPIResponse<Data, Error = NuxtError> = AsyncData<
 
 //* Format from the server (response)
 
-export type UserDTO = Omit<User, "password">;
-
 export interface ISignupResponse {
     message: string;
-    data: UserDTO;
+    data: TUserDTO;
 }
 
 export type ILoginResponse = DatelessResponse;
@@ -44,11 +43,11 @@ export type ILogoutResponse = DatelessResponse;
 
 export interface IUserResponse {
     message: string;
-    data: UserDTO;
+    data: TUserDTO;
 }
 export interface IUsersResponse {
     message: string;
-    data: UserDTO[];
+    data: TUserDTO[];
 }
 export interface IUserToDomainResponse {
     data: UserEntity;

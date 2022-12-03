@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { HttpService } from "~~/client/modules/core/infrastructure/http.service";
-import { FetchResultClient } from "../../common/types";
+import { EndResult } from "../../common/types";
 import {
     IUserToDomainResponse,
     IUsersToDomainResponse,
@@ -16,16 +16,17 @@ class UserRepositoryAdapter implements IUserRepositoryService {
         this.httpService = new HttpService();
         this.fetchAPI = new UserAPI();
     }
-    createUser(body: User): FetchResultClient<IUserToDomainResponse> {
+    createUser(body: User): EndResult<IUserToDomainResponse> {
         const fetchUserResponse = this.httpService.run(() =>
             this.fetchAPI.createUser(body)
         );
+        // TODO fromTrowable
         return fetchUserResponse.map(({ data: userDTO, message }) => ({
             data: new UserEntity(userDTO),
             message,
         }));
     }
-    getUserById(id: string): FetchResultClient<IUserToDomainResponse> {
+    getUserById(id: string): EndResult<IUserToDomainResponse> {
         const fetchUserResponse = this.httpService.run(() =>
             this.fetchAPI.getUserById(id)
         );
@@ -34,7 +35,7 @@ class UserRepositoryAdapter implements IUserRepositoryService {
             message,
         }));
     }
-    getAllUsers(): FetchResultClient<IUsersToDomainResponse> {
+    getAllUsers(): EndResult<IUsersToDomainResponse> {
         const fetchUsersResponse = this.httpService.run(() =>
             this.fetchAPI.getAllUsers()
         );
@@ -45,7 +46,7 @@ class UserRepositoryAdapter implements IUserRepositoryService {
     }
     getUsersByFilter(
         filterOption: TFilterOption
-    ): FetchResultClient<IUsersToDomainResponse> {
+    ): EndResult<IUsersToDomainResponse> {
         const fetchUsersResponse = this.httpService.run(() =>
             this.fetchAPI.getUsersByFilter(filterOption)
         );
@@ -57,7 +58,7 @@ class UserRepositoryAdapter implements IUserRepositoryService {
     editUserById(
         id: string,
         body: Partial<User>
-    ): FetchResultClient<IUserToDomainResponse> {
+    ): EndResult<IUserToDomainResponse> {
         const fetchUserResponse = this.httpService.run(() =>
             this.fetchAPI.editUserById(id, body)
         );
@@ -66,7 +67,7 @@ class UserRepositoryAdapter implements IUserRepositoryService {
             message,
         }));
     }
-    removeUserById(id: string): FetchResultClient<IUserToDomainResponse> {
+    removeUserById(id: string): EndResult<IUserToDomainResponse> {
         const fetchUserResponse = this.httpService.run(() =>
             this.fetchAPI.removeUserById(id)
         );

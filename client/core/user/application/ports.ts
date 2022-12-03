@@ -1,5 +1,5 @@
 import { User } from "@prisma/client";
-import { FetchResultClient } from "../../common/types";
+import { EndResult } from "../../common/types";
 import {
     IUserToDomainResponse,
     IUsersToDomainResponse,
@@ -11,15 +11,15 @@ export type TFilterOption = {
 };
 
 export interface IUserRepositoryService {
-    createUser(body: User): FetchResultClient<IUserToDomainResponse>;
-    getUserById(id: string): FetchResultClient<IUserToDomainResponse>;
-    getAllUsers(): FetchResultClient<IUsersToDomainResponse>;
+    createUser(body: User): EndResult<IUserToDomainResponse>;
+    getUserById(id: string): EndResult<IUserToDomainResponse>;
+    getAllUsers(): EndResult<IUsersToDomainResponse>;
     getUsersByFilter(
         filterOption: TFilterOption
-    ): FetchResultClient<IUsersToDomainResponse>;
+    ): EndResult<IUsersToDomainResponse>;
     editUserById(
         id: string,
         body: Partial<User>
-    ): FetchResultClient<IUserToDomainResponse>;
-    removeUserById(id: string): FetchResultClient<IUserToDomainResponse>;
+    ): EndResult<IUserToDomainResponse>;
+    removeUserById(id: string): EndResult<IUserToDomainResponse>;
 }

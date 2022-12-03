@@ -7,6 +7,7 @@ import { EditUserByIdUseCase } from "../application/usecases/EditUserById.usecas
 import { GetAllUsersUseCase } from "../application/usecases/GetAllUsers.usecase";
 import { GetUserByIdUseCase } from "../application/usecases/GetUserById.usecase";
 import { RemoveUserByIdUseCase } from "../application/usecases/RemoveUserById.usecase";
+import { TUser } from "../domain/user.entity";
 import { UserState, userInitialState } from "./UserState";
 
 export class UserPloc extends Ploc<UserState> {
@@ -73,14 +74,14 @@ export class UserPloc extends Ploc<UserState> {
 
         const state = this.state;
         const changeState = this.changeState;
-        const currentUserId = state.currentUser.id;
+        const currentUserId = state.currentUser!.id;
 
         new Analyser(() =>
             this.editUserByIdUseCase.execute(currentUserId, body)
         ).check({
             respondWithSuccess(data) {
                 notificationStore.displayNotification(data.message);
-                changeState({ currentUser: data.data.get() });
+                changeState({ currentUser: data.data.get() as TUser });
             },
             respondWithClientError(clientError) {
                 notificationStore.displayNotification(clientError.message);
@@ -95,7 +96,7 @@ export class UserPloc extends Ploc<UserState> {
 
         const state = this.state;
         const changeState = this.changeState;
-        const currentUserId = state.currentUser.id;
+        const currentUserId = state.currentUser!.id;
 
         new Analyser(() =>
             this.removeUserByIdUseCase.execute(currentUserId)

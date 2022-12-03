@@ -1,7 +1,7 @@
 import { TUser } from "../domain/user.entity";
 
 export interface UserState {
-    currentUser: TUser;
+    currentUser: TUser | null;
 }
 
 export const userInitialState: UserState = {

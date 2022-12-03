@@ -2,7 +2,7 @@ import { Result, Ok, Err } from "neverthrow";
 import { ZodType, z } from "zod";
 import { ParseError } from "~~/client/core/common/Error/parse.error";
 import { ValidationError } from "~~/client/core/common/Error/validation.error";
-import { CoreEntity } from "../domain/core.entity";
+import { CoreEntity } from "../../../core/common/domain/core.entity";
 import { CoreParser } from "./core.parser";
 
 export interface IProcessService<
