@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { dependenciesLocator } from "./client/core/common/dependencies/dependenciesLocator";
 import { useNotificationStore } from "./stores/notificationStore";
 
 const notificationStore = useNotificationStore();
+
+provide("authPloc", dependenciesLocator.provideAuthPloc());
+provide("userPloc", dependenciesLocator.provideUserPloc());
 </script>
 
 <template>

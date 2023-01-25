@@ -1,8 +1,5 @@
 <script setup lang="ts">
-import { useUserStore } from "~~/stores/userStore";
 import { v4 } from "uuid";
-
-const userStore = useUserStore();
 
 const items = [
     {
@@ -18,7 +15,7 @@ const items = [
 ];
 
 function createUser() {
-    userStore.getOneUser("22");
+    // userStore.getOneUser("22");
 }
 
 definePageMeta({

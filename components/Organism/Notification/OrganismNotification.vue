@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { INotification } from "~~/client/shared/types";
+import { TransitionGroup } from "vue";
+import { INotification } from "~~/client/core/common/types";
 
 const props = defineProps<{
     notifications: INotification[];

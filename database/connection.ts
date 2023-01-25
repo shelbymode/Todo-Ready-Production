@@ -7,5 +7,3 @@ export const connect = () => {
 export const disconnect = async (connection: PrismaClient): Promise<void> => {
     return connection.$disconnect();
 };
-
-export const connector = connect();

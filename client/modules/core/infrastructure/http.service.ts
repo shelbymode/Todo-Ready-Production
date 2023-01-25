@@ -1,20 +1,17 @@
+import { FetchResult } from "./../../../../shared/types/index";
 import { err, ok, ResultAsync } from "neverthrow";
+import { HttpError } from "~~/client/core/common/Error/http.error";
+import { TAPIResponse } from "~~/client/core/common/types/response.types";
 
-import { HttpError } from "~~/client/shared/Error/http.error";
-import { FetchResultClient } from "~~/client/shared/types";
-import { TAPIResponse } from "~~/client/shared/types/response.types";
 import { IHttpService } from "./http.service.types";
 
 export class HttpService implements IHttpService {
-    run<T>(apiCallback: () => TAPIResponse<T>): FetchResultClient<T> {
+    run<T>(apiCallback: () => TAPIResponse<T>): FetchResult<T> {
         return ResultAsync.fromSafePromise(apiCallback()).andThen(
             (response) => {
                 console.log("Response:", response);
 
-                const { data: fetchedData, error } = response;
-
-                console.log("data", fetchedData.value);
-                console.log("error", error.value);
+                const { data, error } = response;
 
                 if (error.value) {
                     return err(
@@ -24,7 +21,7 @@ export class HttpService implements IHttpService {
                         })
                     );
                 } else {
-                    return ok(fetchedData.value);
+                    return ok(data.value);
                 }
             }
         );

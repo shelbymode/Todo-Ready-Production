@@ -1,7 +1,6 @@
-import { useAuthRedirect } from "~~/helpers/useAuthRedirect";
-
 export default defineEventHandler(async (event) => {
-    console.log("3. Auth get");
-    await useAuthRedirect(event);
+    if (!event.context.user) {
+        return { error: "You don't have such permission", code: 302 };
+    }
     return event.context.user;
 });

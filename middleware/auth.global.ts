@@ -1,11 +1,12 @@
-import { COOKIE_AUTH_NAME } from "~~/client/shared/constants";
+import { COOKIE_AUTH_NAME } from "~~/shared/constants";
 
 const ALLOWED_ROUTES = [/^\/auth\/?$/];
 
 export default defineNuxtRouteMiddleware(async (to) => {
-    if (ALLOWED_ROUTES.some((route) => route.test(to.fullPath))) {
-        return;
-    }
+    // TODO: temp
+    // if (ALLOWED_ROUTES.some((route) => route.test(to.fullPath))) {
+    return;
+    // }
 
     const authToken = useCookie(COOKIE_AUTH_NAME);
 
