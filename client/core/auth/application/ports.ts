@@ -2,7 +2,7 @@ import {
     TUserOptionsLogin,
     TUserOptionsSignup,
 } from "~~/backend/Auth/services/auth.service.types";
-import { FetchResultClient } from "../../common/types";
+import { FetchResult } from "~~/shared/types";
 import {
     ILoginResponse,
     ISignupResponse,
@@ -10,7 +10,7 @@ import {
 } from "../../common/types/response.types";
 
 export interface IAuthService {
-    login(userOptions: TUserOptionsLogin): FetchResultClient<ILoginResponse>;
-    signup(userOptions: TUserOptionsSignup): FetchResultClient<ISignupResponse>;
-    logout(): FetchResultClient<ILogoutResponse>;
+    login(userOptions: TUserOptionsLogin): FetchResult<ILoginResponse>;
+    signup(userOptions: TUserOptionsSignup): FetchResult<ISignupResponse>;
+    logout(): FetchResult<ILogoutResponse>;
 }

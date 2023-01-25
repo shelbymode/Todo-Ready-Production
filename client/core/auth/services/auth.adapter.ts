@@ -1,9 +1,9 @@
+import { FetchResult } from "./../../../../shared/types/index";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
 } from "~~/backend/Auth/services/auth.service.types";
 import { HttpService } from "~~/client/modules/core/infrastructure/http.service";
-import { FetchResultClient } from "../../common/types";
 import {
     DatelessResponse,
     ISignupResponse,
@@ -19,15 +19,13 @@ class AuthAdapter implements IAuthService {
         this.httpService = new HttpService();
         this.fetchAPI = new AuthAPI();
     }
-    login(userOptions: TUserOptionsLogin): FetchResultClient<DatelessResponse> {
+    login(userOptions: TUserOptionsLogin): FetchResult<DatelessResponse> {
         return this.httpService.run(() => this.fetchAPI.login(userOptions));
     }
-    signup(
-        userOptions: TUserOptionsSignup
-    ): FetchResultClient<ISignupResponse> {
+    signup(userOptions: TUserOptionsSignup): FetchResult<ISignupResponse> {
         return this.httpService.run(() => this.fetchAPI.signup(userOptions));
     }
-    logout(): FetchResultClient<DatelessResponse> {
+    logout(): FetchResult<DatelessResponse> {
         return this.httpService.run(() => this.fetchAPI.logout());
     }
 }

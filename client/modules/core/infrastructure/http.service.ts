@@ -1,12 +1,12 @@
+import { FetchResult } from "./../../../../shared/types/index";
 import { err, ok, ResultAsync } from "neverthrow";
 import { HttpError } from "~~/client/core/common/Error/http.error";
-import { FetchResultClient } from "~~/client/core/common/types";
 import { TAPIResponse } from "~~/client/core/common/types/response.types";
 
 import { IHttpService } from "./http.service.types";
 
 export class HttpService implements IHttpService {
-    run<T>(apiCallback: () => TAPIResponse<T>): FetchResultClient<T> {
+    run<T>(apiCallback: () => TAPIResponse<T>): FetchResult<T> {
         return ResultAsync.fromSafePromise(apiCallback()).andThen(
             (response) => {
                 console.log("Response:", response);

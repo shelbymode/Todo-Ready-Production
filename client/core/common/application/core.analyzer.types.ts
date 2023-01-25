@@ -1,7 +1,7 @@
 import { HttpError } from "~~/client/core/common/Error/http.error";
+import { EndResult } from "~~/shared/types";
 import { ParseError } from "../Error/parse.error";
 import { ValidationError } from "../Error/validation.error";
-import { EndResult } from "../types";
 
 type _IUseCaseCallbacks<D> = {
     respondWithSuccess(data: D): void;

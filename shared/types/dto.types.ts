@@ -9,6 +9,7 @@ export const userDTOSchema = z
         role: z.nativeEnum(Role),
         createdAt: z.date(),
         updatedAt: z.date(),
+        isOnceUpdated: z.boolean(),
     })
     .strict();
 

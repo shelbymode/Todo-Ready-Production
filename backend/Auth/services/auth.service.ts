@@ -1,42 +1,36 @@
-import { FetchResultServer } from "~~/client/shared/types/index";
 import { User } from "@prisma/client";
-import { AuthJWTService } from "./jwt.service";
+import { H3Event } from "h3";
+import { err, ok } from "neverthrow";
+import { v4 } from "uuid";
+import { _UserService } from "~~/backend/User/services/user.service";
+import { TOKEN_EXPIRY_DAYS, COOKIE_AUTH_NAME } from "~~/shared/constants";
+import { FetchResultServer } from "~~/shared/types";
 import {
     IAuthService,
+    ITokenResponse,
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "./auth.service.types";
-import {
-    COOKIE_AUTH_NAME,
-    TOKEN_EXPIRY_DAYS,
-} from "~~/client/shared/constants";
-import { err, ok, ResultAsync } from "neverthrow";
-import { H3Event } from "h3";
-import { UserService } from "~~/backend/User/services/user.service";
-import { connector } from "~~/database/connection";
-import { ITokenResponse } from "./jwt.service.types";
+} from "../application/ports";
+import { AuthJWTService } from "./jwt.service";
 
-class _AuthServerService extends AuthJWTService implements IAuthService {
-    userService: UserService;
-
-    constructor(userService: UserService) {
+export class _AuthService extends AuthJWTService implements IAuthService {
+    constructor(public userService: _UserService) {
         super();
-        this.userService = userService;
     }
 
-    login(userOptions: TUserOptionsLogin): FetchResultServer<ITokenResponse> {
+    login({
+        email,
+        password,
+    }: TUserOptionsLogin): FetchResultServer<ITokenResponse> {
         let user: User;
 
-        return ResultAsync.fromPromise(
-            this.userService.findByEmail(userOptions.email),
-            () => {
-                return createError({
-                    statusCode: 500,
-                    message: "DB Error (find by email)",
-                });
-            }
-        )
-            .andThen((potentialUser) => {
+        return this.userService
+            .getUserByFilter({
+                filter: "email",
+                value: email,
+            })
+            .andThen((potentialUserEntity) => {
+                const potentialUser = potentialUserEntity.get();
                 if (!potentialUser) {
                     return err(
                         createError({
@@ -45,12 +39,14 @@ class _AuthServerService extends AuthJWTService implements IAuthService {
                         })
                     );
                 }
+
                 user = potentialUser;
-                return ok(potentialUser);
+
+                return ok(user);
             })
             .andThen((user) => {
                 return this.isValidPassword({
-                    inputPassword: userOptions.password,
+                    inputPassword: password,
                     userHash: user.password,
                 });
             })
@@ -85,59 +81,46 @@ class _AuthServerService extends AuthJWTService implements IAuthService {
             ),
         });
     }
-    signup(userOptions: TUserOptionsSignup): FetchResultServer<User> {
-        return ResultAsync.fromPromise(
-            this.userService.findByEmail(userOptions.email),
-            (e) => {
-                console.log(e);
-
-                return createError({
-                    statusCode: 500,
-                    message: "DB Error (find by email)",
-                });
-            }
-        ).andThen((potentialUser) => {
-            if (potentialUser) {
-                return err(
-                    createError({
-                        statusCode: 400,
-                        message: "User already exists!",
-                    })
-                );
-            }
-            if (userOptions.password !== userOptions.confirmPassword) {
-                return err(
-                    createError({
-                        statusCode: 400,
-                        message: "Password aren't equal",
-                    })
-                );
-            }
-
-            const { email, name } = userOptions;
-            const hashedPassword = this.plainStringToHash(userOptions.password);
-
-            return ResultAsync.fromPromise(
-                this.userService.create({
-                    email,
-                    name,
-                    password: hashedPassword,
-                }),
-                () => {
-                    return createError({
-                        statusCode: 500,
-                        message: "DB Error (create user)",
-                    });
+    signup({ email, name, password, confirmPassword }: TUserOptionsSignup) {
+        return this.userService
+            .getUserByFilter({
+                filter: "email",
+                value: email,
+            })
+            .andThen((potentialUserEntity) => {
+                if (potentialUserEntity.get()) {
+                    return err(
+                        createError({
+                            statusCode: 400,
+                            message: "User already exists!",
+                        })
+                    );
                 }
-            );
-        });
+                if (password !== confirmPassword) {
+                    return err(
+                        createError({
+                            statusCode: 400,
+                            message: "Password aren't equal",
+                        })
+                    );
+                }
+
+                const body = {
+                    id: v4(),
+                    email,
+                    name: name,
+                    password: this.plainStringToHash(password),
+                };
+
+                return ok(body);
+            })
+            .andThen((body) => {
+                return this.userService.createUser({
+                    ...body,
+                });
+            });
     }
     clearLoginCookie(event: H3Event) {
         deleteCookie(event, COOKIE_AUTH_NAME);
     }
 }
-const AuthServerService = new _AuthServerService(
-    new UserService(connector.user)
-);
-
-export { AuthServerService };

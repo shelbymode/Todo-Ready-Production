@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 import { HttpService } from "~~/client/modules/core/infrastructure/http.service";
-import { EndResult } from "../../common/types";
+import { EndResult } from "~~/shared/types";
 import {
     IUserToDomainResponse,
     IUsersToDomainResponse,

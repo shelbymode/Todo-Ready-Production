@@ -1,12 +1,12 @@
 import { User } from "@prisma/client";
-import { EndResult } from "../../common/types";
+import { EndResult } from "~~/shared/types";
 import {
     IUserToDomainResponse,
     IUsersToDomainResponse,
 } from "../../common/types/response.types";
 
 export type TFilterOption = {
-    field: string;
+    filter: string;
     value: string | number | boolean | null;
 };
 

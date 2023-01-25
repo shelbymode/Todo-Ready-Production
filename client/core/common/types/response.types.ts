@@ -1,7 +1,7 @@
 import { AsyncData, NuxtError } from "#app";
-import { User } from "@prisma/client";
 import { TUserDTO } from "~~/shared/types/dto.types";
 import { UserEntity } from "../../user/domain/user.entity";
+import { HttpError } from "../Error/http.error";
 
 /* 
   ╔═════════════════════════════════════════════════════════════════════════╗
@@ -73,4 +73,4 @@ export const SuccessResponse = <T>(
     data,
 });
 
-export const FailResponse = (error: NuxtError) => error;
+export const FailResponse = (error: HttpError | NuxtError) => error;
