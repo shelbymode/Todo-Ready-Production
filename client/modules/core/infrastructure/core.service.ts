@@ -1,6 +1,6 @@
 import { ZodType, z } from "zod";
-import { ICRUDFetchRepository } from "~~/client/shared/types";
-import { CoreEntity } from "../domain/core.entity";
+import { ICRUDFetchRepository } from "~~/client/core/common/types";
+import { CoreEntity } from "../../../core/common/domain/core.entity";
 import { CoreParser } from "./core.parser";
 import { ICoreService } from "./core.service.types";
 import { HttpService } from "./http.service";

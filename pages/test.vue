@@ -1,48 +1,40 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { UserPloc } from "~~/client/core/user/presentation/UserPloc";
+
+const userPloc = inject<UserPloc>("userPloc") as UserPloc;
+// const authState = useVPlocState(authPloc);
+
+const id = "9aa8e1cd-8fa7-42fa-87c2-7cf117f3bea7";
+// const getAllUsers = () => userPloc.getAllUsers();
+const getUserById = () => userPloc.getUserById(id);
+</script>
 
 <template>
-    <div
-        flex="~ col"
-        bg-emerald-200
-        class="w-1/2"
-        gap-y-20
-        border-black
-        border-3
-        p-20
-    >
-        <div flex="~ col">
-            <input
-                v-model="formLogin.email"
-                class="bg-dark-500/70 px-3 py-2 rounded-xl text-white"
-                placeholder="email"
-                type="text"
-                @input="v$.email.$touch"
-            />
-            <p
-                v-if="isErrorAndDirty('email')"
-                class="text-sm font-bold text-red-900"
+    <div class="h-screen h-full bg-dark-500 flex justify-center items-center">
+        <div
+            class="w-1/2 h-1/2 rounded-xl bg-neutral-100 flex items-center flex-wrap gap-x-5"
+        >
+            <button class="bg-emerald-200 text-black text-xl border-2 p-3 p-3">
+                create user
+            </button>
+            <button
+                class="bg-emerald-200 text-black text-xl border-2 p-3 p-3"
+                @click="getUserById"
             >
-                {{ getMessage("email") }}
-            </p>
-        </div>
-
-        <div flex="~ col">
-            <input
-                v-model="formLogin.name"
-                class="bg-dark-500/70 px-3 py-2 rounded-xl text-white"
-                placeholder="name"
-                type="text"
-                @input="v$.name.$touch"
-            />
-            <p
-                v-if="isErrorAndDirty('name')"
-                class="text-sm font-bold text-red-900"
-            >
-                {{ getMessage("name") }}
-            </p>
-        </div>
-        <div flex="~ col" class="border-2 border-dark-500/50 p-3 text-sm">
-            <p>invalid: {{ v$ }}</p>
+                get user by id
+            </button>
+            <button class="bg-emerald-200 text-black text-xl border-2 p-3 p-3">
+                get all users
+            </button>
+            <button class="bg-emerald-200 text-black text-xl border-2 p-3 p-3">
+                get users by filter
+            </button>
+            <button class="bg-emerald-200 text-black text-xl border-2 p-3 p-3">
+                edit user by id
+            </button>
+            <button class="bg-emerald-200 text-black text-xl border-2 p-3 p-3">
+                remove user by id
+            </button>
         </div>
     </div>
 </template>

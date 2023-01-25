@@ -1,9 +1,9 @@
-import { Auth } from "~~/client/shared/constants";
 import {
     TUserOptionsLogin,
     TUserOptionsSignup,
-} from "~~/backend/Auth/infrastructure/Service/auth.service.types";
-import { useAuthStore } from "~~/stores/authStore";
+} from "~~/backend/Auth/services/auth.service.types";
+import { AuthPloc } from "~~/client/core/auth/presentation/AuthPloc";
+import { Auth } from "~~/shared/constants";
 
 export const useDataAuth = ({
     formLogin,
@@ -12,16 +12,16 @@ export const useDataAuth = ({
     formLogin: TUserOptionsLogin;
     formSignup: TUserOptionsSignup;
 }) => {
-    const storeAuth = useAuthStore();
+    const authPloc = inject<AuthPloc>("authPloc") as AuthPloc;
 
     function loginHandler(e: Event) {
         console.log("login...");
-        storeAuth.login(formLogin);
+        authPloc.login(formLogin);
     }
 
     function signupHandler(e: Event) {
         console.log("signup...");
-        storeAuth.signup(formSignup);
+        authPloc.signup(formSignup);
     }
 
     const mapInputInfo = {

@@ -1,9 +1,9 @@
-import { TUserOptionsLogin } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
+import { TUserOptionsLogin } from "~~/backend/Auth/application/ports";
+import { AuthService } from "~~/backend/common/dependencies/dependenciesLocator";
 import {
-    FailResponse,
     SuccessResponse,
-} from "~~/client/shared/types/response.types";
+    FailResponse,
+} from "~~/client/core/common/types/response.types";
 
 const loginValidate = (body: TUserOptionsLogin) => {
     if (!body.email || !body.password) {
@@ -20,13 +20,13 @@ export default defineEventHandler(async (event) => {
     loginValidate(body);
 
     try {
-        const potentialUserToken = await AuthServerService.login({
+        const potentialUserToken = await AuthService.login({
             email: body.email,
             password: body.password,
         });
 
         if (potentialUserToken.isOk()) {
-            AuthServerService.setLoginCookie(event, potentialUserToken.value);
+            AuthService.setLoginCookie(event, potentialUserToken.value);
             return SuccessResponse("Success authorization");
         } else if (potentialUserToken.isErr()) {
             throw FailResponse(potentialUserToken.error);
