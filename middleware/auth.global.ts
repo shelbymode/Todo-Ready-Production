@@ -1,4 +1,4 @@
-import { COOKIE_AUTH_NAME } from "~~/client/shared/constants";
+import { COOKIE_AUTH_NAME } from "~~/shared/constants";
 
 const ALLOWED_ROUTES = [/^\/auth\/?$/];
 

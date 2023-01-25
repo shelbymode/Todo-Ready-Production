@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Ref } from "vue";
-import { INotification } from "~~/client/shared/types";
+import { INotification } from "~~/client/core/common/types";
 
 const props = defineProps<{
     notification: INotification;

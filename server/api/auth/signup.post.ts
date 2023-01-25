@@ -1,9 +1,9 @@
+import { TUserOptionsSignup } from "~~/backend/Auth/application/ports";
+import { AuthService } from "~~/backend/common/dependencies/dependenciesLocator";
 import {
     SuccessResponse,
     FailResponse,
-} from "~~/client/shared/types/response.types";
-import { AuthServerService } from "~~/backend/Auth/infrastructure/Service/auth.service";
-import { TUserOptionsSignup } from "~~/backend/Auth/infrastructure/Service/auth.service.types";
+} from "~~/client/core/common/types/response.types";
 
 const signupValidate = (body: TUserOptionsSignup) => {
     if (!body.email || !body.name || !body.password || !body.confirmPassword) {
@@ -20,16 +20,10 @@ export default defineEventHandler(async (event) => {
     signupValidate(body);
 
     try {
-        const potentialNewUser = await AuthServerService.signup({
-            email: body.email,
-            name: body.name,
-            password: body.password,
-            confirmPassword: body.confirmPassword,
-        });
+        const potentialNewUser = await AuthService.signup({ ...body });
         if (potentialNewUser.isOk()) {
             return SuccessResponse("Success registration", {
-                ...potentialNewUser.value,
-                password: undefined,
+                ...potentialNewUser.value.toDTO(),
             });
         } else if (potentialNewUser.isErr()) {
             throw FailResponse(potentialNewUser.error);

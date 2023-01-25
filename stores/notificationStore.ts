@@ -1,5 +1,5 @@
-import { INotification } from "../client/shared/types/index";
 import { defineStore } from "pinia";
+import { INotification } from "~~/client/core/common/types";
 import { useVNotification } from "~~/composition/V/useVNotification";
 
 export type TIDNotification = string;
@@ -22,8 +22,9 @@ const useNotificationStore = defineStore("notification-bus", {
     actions: {
         displayNotification(
             text: string,
-            options: TConfigNotification
+            options?: TConfigNotification
         ): TIDNotification {
+            options = options || {};
             const { createNotification } = useVNotification({
                 storeNotification: this.$state.notifications,
                 ...options,
